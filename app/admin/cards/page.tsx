@@ -7,6 +7,8 @@ import { BirthdayCard } from '@/lib/types';
 import { Edit, Trash2, Eye, Plus } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 export default function AllCards() {
   const [cards, setCards] = useState<BirthdayCard[]>([]);
   const [loading, setLoading] = useState(true);

@@ -9,6 +9,8 @@ import '@/templates'; // Import to register templates
 import PhotoUpload from '@/components/PhotoUpload';
 import { Save, Eye } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export default function CreateCard() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);

@@ -10,6 +10,8 @@ import PhotoUpload from '@/components/PhotoUpload';
 import { Save, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 export default function EditCard() {
   const router = useRouter();
   const params = useParams();
