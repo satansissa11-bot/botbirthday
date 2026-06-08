@@ -2,12 +2,39 @@ export interface BirthdayCard {
   id: string;
   slug: string;
   recipient_name: string;
+  sender_name?: string;
   message: string;
   template: string; // Changed from Template type to string for unlimited templates
   photos: string[];
+  cover_photo?: string;
   music_url?: string;
   created_at: string;
   updated_at: string;
+}
+
+export interface CardAnalytics {
+  id: string;
+  card_id: string;
+  total_views: number;
+  unique_visitors: number;
+  last_viewed: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CardView {
+  id: string;
+  card_id: string;
+  visitor_id: string;
+  device_type: 'mobile' | 'desktop' | 'tablet';
+  viewed_at: string;
+}
+
+export interface AnalyticsStats {
+  totalCards: number;
+  totalViews: number;
+  totalUniqueVisitors: number;
+  averageViewsPerCard: number;
 }
 
 export interface TemplateConfig {

@@ -8,9 +8,11 @@ import { cn } from '@/lib/utils';
 interface PhotoUploadProps {
   photos: string[];
   onPhotosChange: (photos: string[]) => void;
+  coverPhoto?: string;
+  onCoverPhotoChange?: (coverPhoto: string) => void;
 }
 
-export default function PhotoUpload({ photos, onPhotosChange }: PhotoUploadProps) {
+export default function PhotoUpload({ photos, onPhotosChange, coverPhoto, onCoverPhotoChange }: PhotoUploadProps) {
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -57,6 +59,17 @@ export default function PhotoUpload({ photos, onPhotosChange }: PhotoUploadProps
   const removePhoto = (index: number) => {
     const newPhotos = photos.filter((_, i) => i !== index);
     onPhotosChange(newPhotos);
+    
+    // Remove cover photo if it was the deleted photo
+    if (coverPhoto === photos[index] && onCoverPhotoChange) {
+      onCoverPhotoChange('');
+    }
+  };
+
+  const setAsCoverPhoto = (photo: string) => {
+    if (onCoverPhotoChange) {
+      onCoverPhotoChange(photo);
+    }
   };
 
   return (
@@ -113,6 +126,19 @@ export default function PhotoUpload({ photos, onPhotosChange }: PhotoUploadProps
               >
                 <X className="w-4 h-4" />
               </button>
+              {onCoverPhotoChange && (
+                <button
+                  onClick={() => setAsCoverPhoto(photo)}
+                  className={cn(
+                    'absolute bottom-2 left-2 px-2 py-1 text-xs rounded-full transition-all',
+                    coverPhoto === photo
+                      ? 'bg-purple-600 text-white'
+                      : 'bg-white/80 hover:bg-white text-gray-700 opacity-0 group-hover:opacity-100'
+                  )}
+                >
+                  {coverPhoto === photo ? 'Cover' : 'Set Cover'}
+                </button>
+              )}
             </div>
           ))}
         </div>

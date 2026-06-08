@@ -10,31 +10,37 @@ interface SlideshowProps {
   autoPlay?: boolean;
   interval?: number;
   kenBurns?: boolean;
+  coverPhoto?: string;
 }
 
-export default function Slideshow({ photos, autoPlay = true, interval = 3000, kenBurns = true }: SlideshowProps) {
+export default function Slideshow({ photos, autoPlay = true, interval = 3000, kenBurns = true, coverPhoto }: SlideshowProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
+  // Reorder photos to put cover photo first
+  const orderedPhotos = coverPhoto && photos.includes(coverPhoto)
+    ? [coverPhoto, ...photos.filter(p => p !== coverPhoto)]
+    : photos;
+
   useEffect(() => {
-    if (!autoPlay || photos.length <= 1) return;
+    if (!autoPlay || orderedPhotos.length <= 1) return;
 
     const timer = setInterval(() => {
       setDirection(1);
-      setCurrentIndex((prev) => (prev + 1) % photos.length);
+      setCurrentIndex((prev) => (prev + 1) % orderedPhotos.length);
     }, interval);
 
     return () => clearInterval(timer);
-  }, [autoPlay, interval, photos.length]);
+  }, [autoPlay, interval, orderedPhotos.length]);
 
   const goToPrevious = () => {
     setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + photos.length) % photos.length);
+    setCurrentIndex((prev) => (prev - 1 + orderedPhotos.length) % orderedPhotos.length);
   };
 
   const goToNext = () => {
     setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % photos.length);
+    setCurrentIndex((prev) => (prev + 1) % orderedPhotos.length);
   };
 
   const variants = {
@@ -55,7 +61,7 @@ export default function Slideshow({ photos, autoPlay = true, interval = 3000, ke
     }),
   };
 
-  if (photos.length === 0) {
+  if (orderedPhotos.length === 0) {
     return (
       <div className="w-full h-full flex items-center justify-center bg-gray-100">
         <p className="text-gray-500">No photos uploaded</p>
@@ -63,14 +69,14 @@ export default function Slideshow({ photos, autoPlay = true, interval = 3000, ke
     );
   }
 
-  if (photos.length === 1) {
+  if (orderedPhotos.length === 1) {
     return (
       <div className="w-full h-full">
         {kenBurns ? (
-          <KenBurnsImage src={photos[0]} alt="Birthday photo" duration={10} scale={1.1} />
+          <KenBurnsImage src={orderedPhotos[0]} alt="Birthday photo" duration={10} scale={1.1} />
         ) : (
           <img
-            src={photos[0]}
+            src={orderedPhotos[0]}
             alt="Birthday photo"
             className="w-full h-full object-cover"
           />
@@ -84,7 +90,7 @@ export default function Slideshow({ photos, autoPlay = true, interval = 3000, ke
       <AnimatePresence initial={false} custom={direction} mode="popLayout">
         <motion.img
           key={currentIndex}
-          src={photos[currentIndex]}
+          src={orderedPhotos[currentIndex]}
           alt={`Photo ${currentIndex + 1}`}
           custom={direction}
           variants={variants}
@@ -124,7 +130,7 @@ export default function Slideshow({ photos, autoPlay = true, interval = 3000, ke
 
       {/* Dots indicator */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-        {photos.map((_, index) => (
+        {orderedPhotos.map((_, index) => (
           <button
             key={index}
             onClick={() => {

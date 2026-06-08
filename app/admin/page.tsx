@@ -7,6 +7,7 @@ import { generateSlug } from '@/lib/utils';
 import { getAllTemplates } from '@/lib/templateRegistry';
 import '@/templates'; // Import to register templates
 import PhotoUpload from '@/components/PhotoUpload';
+import TemplatePreview from '@/components/TemplatePreview';
 import { Save, Eye } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
@@ -17,9 +18,11 @@ export default function CreateCard() {
   const [templates, setTemplates] = useState<any[]>([]);
   const [formData, setFormData] = useState({
     recipient_name: '',
+    sender_name: '',
     message: '',
     template: 'romantic',
     photos: [] as string[],
+    cover_photo: '',
     music_url: '',
   });
 
@@ -39,15 +42,18 @@ export default function CreateCard() {
       const { error } = await supabase.from('birthday_cards').insert({
         slug,
         recipient_name: formData.recipient_name,
+        sender_name: formData.sender_name || null,
         message: formData.message,
         template: formData.template,
         photos: formData.photos,
+        cover_photo: formData.cover_photo || null,
         music_url: formData.music_url || null,
       });
 
       if (error) throw error;
 
-      router.push(`/admin/cards`);
+      const cardUrl = `${window.location.origin}/card/${slug}`;
+      router.push(`/admin/success?url=${encodeURIComponent(cardUrl)}&title=${encodeURIComponent(formData.recipient_name)}`);
     } catch (error) {
       console.error('Error creating card:', error);
       alert('Error creating card. Please try again.');
@@ -77,6 +83,21 @@ export default function CreateCard() {
           />
         </div>
 
+        {/* Sender Name */}
+        <div>
+          <label htmlFor="sender_name" className="block text-sm font-medium text-gray-700 mb-2">
+            Your Name (optional)
+          </label>
+          <input
+            type="text"
+            id="sender_name"
+            value={formData.sender_name}
+            onChange={(e) => setFormData({ ...formData, sender_name: e.target.value })}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            placeholder="Enter your name"
+          />
+        </div>
+
         {/* Birthday Message */}
         <div>
           <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
@@ -103,7 +124,7 @@ export default function CreateCard() {
             required
             value={formData.template}
             onChange={(e) => setFormData({ ...formData, template: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent mb-4"
           >
             {templates.map((template) => (
               <option key={template.id} value={template.id}>
@@ -111,6 +132,13 @@ export default function CreateCard() {
               </option>
             ))}
           </select>
+          
+          {/* Template Preview */}
+          <TemplatePreview
+            templates={templates}
+            selectedTemplate={formData.template}
+            onTemplateSelect={(templateId) => setFormData({ ...formData, template: templateId })}
+          />
         </div>
 
         {/* Photo Upload */}
@@ -121,6 +149,8 @@ export default function CreateCard() {
           <PhotoUpload
             photos={formData.photos}
             onPhotosChange={(photos) => setFormData({ ...formData, photos })}
+            coverPhoto={formData.cover_photo}
+            onCoverPhotoChange={(coverPhoto) => setFormData({ ...formData, cover_photo: coverPhoto })}
           />
         </div>
 

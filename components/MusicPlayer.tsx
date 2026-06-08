@@ -5,9 +5,10 @@ import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 
 interface MusicPlayerProps {
   musicUrl?: string;
+  canPlay?: boolean;
 }
 
-export default function MusicPlayer({ musicUrl }: MusicPlayerProps) {
+export default function MusicPlayer({ musicUrl, canPlay = true }: MusicPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -17,6 +18,17 @@ export default function MusicPlayer({ musicUrl }: MusicPlayerProps) {
       audioRef.current.volume = isMuted ? 0 : 0.5;
     }
   }, [isMuted]);
+
+  useEffect(() => {
+    if (canPlay && audioRef.current && !isPlaying) {
+      // Auto-play when gift is opened
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch(() => {
+        // Auto-play was blocked, user needs to click play
+      });
+    }
+  }, [canPlay]);
 
   const togglePlay = () => {
     if (audioRef.current) {

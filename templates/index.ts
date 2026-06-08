@@ -7,6 +7,12 @@ import darkTemplate from './dark/config';
 import narutoTemplate from './naruto/config';
 import weddingTemplate from './wedding/config';
 import minecraftTemplate from './minecraft/config';
+import romanticNewTemplate from './romantic-new/config';
+import cuteTemplate from './cute/config';
+import elegantTemplate from './elegant/config';
+import darkLuxuryTemplate from './dark-luxury/config';
+import modernTemplate from './modern/config';
+import minimalistTemplate from './minimalist/config';
 
 // Register all templates
 // New templates can be added by simply importing and registering them here
@@ -19,6 +25,12 @@ registerTemplate(darkTemplate);
 registerTemplate(narutoTemplate);
 registerTemplate(weddingTemplate);
 registerTemplate(minecraftTemplate);
+registerTemplate(romanticNewTemplate);
+registerTemplate(cuteTemplate);
+registerTemplate(elegantTemplate);
+registerTemplate(darkLuxuryTemplate);
+registerTemplate(modernTemplate);
+registerTemplate(minimalistTemplate);
 
 // Re-export registry functions for convenience
 export { getTemplate, getAllTemplates, getTemplatesByCategory } from '@/lib/templateRegistry';

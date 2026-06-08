@@ -9,6 +9,7 @@ import '@/templates'; // Import to register templates
 import Slideshow from '@/components/Slideshow';
 import MusicPlayer from '@/components/MusicPlayer';
 import Confetti from '@/components/Confetti';
+import GiftOpening from '@/components/GiftOpening';
 import { Cake, Heart, Star } from 'lucide-react';
 import LoadingAnimation from '@/components/animations/LoadingAnimation';
 import PageTransition from '@/components/animations/PageTransition';
@@ -18,6 +19,13 @@ import GamingEffects from '@/components/animations/GamingEffects';
 import LuxuryEffects from '@/components/animations/LuxuryEffects';
 import RomanticEffects from '@/components/animations/RomanticEffects';
 import DarkEffects from '@/components/animations/DarkEffects';
+import RomanticTemplate from '@/app/card/templates/RomanticTemplate';
+import CuteTemplate from '@/app/card/templates/CuteTemplate';
+import ElegantTemplate from '@/app/card/templates/ElegantTemplate';
+import DarkLuxuryTemplate from '@/app/card/templates/DarkLuxuryTemplate';
+import ModernTemplate from '@/app/card/templates/ModernTemplate';
+import MinimalistTemplate from '@/app/card/templates/MinimalistTemplate';
+import { trackCardView } from '@/lib/analytics';
 
 export default function CardPage() {
   const params = useParams();
@@ -26,6 +34,8 @@ export default function CardPage() {
   const [card, setCard] = useState<BirthdayCard | null>(null);
   const [loading, setLoading] = useState(true);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [showGiftOpening, setShowGiftOpening] = useState(true);
+  const [canPlayMusic, setCanPlayMusic] = useState(false);
 
   useEffect(() => {
     fetchCard();
@@ -34,8 +44,20 @@ export default function CardPage() {
   useEffect(() => {
     if (card && !showConfetti) {
       setShowConfetti(true);
+      // Track card view
+      trackCardView(card.id);
     }
   }, [card]);
+
+  const handleGiftOpen = () => {
+    setShowGiftOpening(false);
+    setCanPlayMusic(true);
+  };
+
+  const handleGiftSkip = () => {
+    setShowGiftOpening(false);
+    setCanPlayMusic(true);
+  };
 
   const fetchCard = async () => {
     try {
@@ -73,6 +95,17 @@ export default function CardPage() {
     );
   }
 
+  // Show gift opening before card
+  if (showGiftOpening) {
+    return (
+      <GiftOpening
+        template={card.template}
+        onOpen={handleGiftOpen}
+        onSkip={handleGiftSkip}
+      />
+    );
+  }
+
   const template = getTemplate(card.template) || getTemplate('romantic');
 
   if (!template) {
@@ -84,6 +117,33 @@ export default function CardPage() {
         </div>
       </div>
     );
+  }
+
+  // Use template-specific layouts for new templates
+  const templateId = template.id;
+  
+  if (templateId === 'romantic-new') {
+    return <RomanticTemplate card={card} />;
+  }
+  
+  if (templateId === 'cute') {
+    return <CuteTemplate card={card} />;
+  }
+  
+  if (templateId === 'elegant') {
+    return <ElegantTemplate card={card} />;
+  }
+  
+  if (templateId === 'dark-luxury') {
+    return <DarkLuxuryTemplate card={card} />;
+  }
+  
+  if (templateId === 'modern') {
+    return <ModernTemplate card={card} />;
+  }
+  
+  if (templateId === 'minimalist') {
+    return <MinimalistTemplate card={card} />;
   }
 
   // Get template-specific effects component
@@ -135,7 +195,7 @@ export default function CardPage() {
         }}
       >
         {showConfetti && <Confetti />}
-        <MusicPlayer musicUrl={card.music_url || template.music?.defaultUrl} />
+        <MusicPlayer musicUrl={card.music_url || template.music?.defaultUrl} canPlay={canPlayMusic} />
 
         {/* Template-specific effects */}
         {getTemplateEffects(template.id)}
@@ -182,7 +242,7 @@ export default function CardPage() {
           {/* Slideshow */}
           <div className="flex-1 px-4 pb-4">
             <div className="max-w-6xl mx-auto h-[50vh] md:h-[60vh] rounded-2xl overflow-hidden shadow-2xl">
-              <Slideshow photos={card.photos} autoPlay={true} interval={4000} />
+              <Slideshow photos={card.photos} autoPlay={true} interval={4000} coverPhoto={card.cover_photo} />
             </div>
           </div>
 
