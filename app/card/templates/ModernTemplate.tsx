@@ -4,11 +4,13 @@ import { useState, useEffect } from 'react';
 import { BirthdayCard } from '@/lib/types';
 import { getTemplate } from '@/lib/templateRegistry';
 import '@/templates';
-import Slideshow from '@/components/Slideshow';
+import PhotoLayout from '@/components/PhotoLayout';
 import MusicPlayer from '@/components/MusicPlayer';
 import Confetti from '@/components/Confetti';
+import BrandFooter from '@/components/BrandFooter';
+import { FadeUp, TextReveal, PhotoReveal, ScaleIn, SlideInLeft, SlideInRight } from '@/components/animations/PremiumAnimations';
 import { motion } from 'framer-motion';
-import { Zap, Sparkles } from 'lucide-react';
+import { Zap, Sparkles, Cpu } from 'lucide-react';
 
 interface ModernTemplateProps {
   card: BirthdayCard;
@@ -50,130 +52,149 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
       <MusicPlayer musicUrl={card.music_url || template?.music?.defaultUrl} />
 
       {/* Main content */}
-      <div className="relative z-10 min-h-screen flex flex-col">
-        {/* Large hero header */}
-        <motion.div 
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="text-center pt-16 pb-8 px-4"
-        >
-          <div className="flex justify-center mb-6">
+      <div className="relative z-10 min-h-screen flex flex-col px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        {/* Hero Section */}
+        <FadeUp delay={0.2}>
+          <div className="text-center mb-6 sm:mb-8">
+            {/* Rotating zap icon */}
             <motion.div
-              animate={{ rotate: [0, 360] }}
-              transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, type: 'spring' }}
+              className="flex justify-center mb-4 sm:mb-6"
             >
-              <Zap className="w-16 h-16 text-white" fill="currentColor" />
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+              >
+                <Zap className="w-14 h-14 sm:w-16 sm:h-16 text-white" fill="currentColor" />
+              </motion.div>
             </motion.div>
-          </div>
-          <h1 
-            className="text-6xl md:text-9xl font-bold mb-4 text-white"
-            style={{ 
-              fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-              letterSpacing: '-0.05em',
-            }}
-          >
-            Happy
-          </h1>
-          <motion.h2
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-5xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-cyan-300"
-            style={{ 
-              fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-              letterSpacing: '-0.05em',
-            }}
-          >
-            Birthday
-          </motion.h2>
-          <motion.h3
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-3xl sm:text-4xl md:text-6xl font-bold mt-4 text-white/90"
-            style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-          >
-            {card.recipient_name}
-          </motion.h3>
-          {card.sender_name && (
-            <motion.p
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.7, duration: 0.8 }}
-              className="text-lg sm:text-xl md:text-2xl text-white/70 mt-2"
-              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-            >
-              From {card.sender_name}
-            </motion.p>
-          )}
-        </motion.div>
 
-        {/* Glassmorphism photo gallery */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.7, duration: 0.8 }}
-          className="flex-1 px-4 pb-8"
-        >
-          <div className="max-w-6xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-4 shadow-2xl border border-white/20">
-              <div className="rounded-2xl overflow-hidden">
-                <Slideshow photos={card.photos} autoPlay={true} interval={5000} coverPhoto={card.cover_photo} />
-              </div>
+            {/* Happy - Inter font */}
+            <SlideInLeft delay={0.4}>
+              <h1 
+                className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold mb-2 sm:mb-4 text-white"
+                style={{ 
+                  fontFamily: 'var(--font-inter)',
+                  letterSpacing: '-0.05em',
+                }}
+              >
+                Happy
+              </h1>
+            </SlideInLeft>
+
+            {/* Birthday - Poppins font with gradient */}
+            <SlideInRight delay={0.5}>
+              <h2
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-white to-cyan-300"
+                style={{ 
+                  fontFamily: 'var(--font-poppins)',
+                  letterSpacing: '-0.05em',
+                }}
+              >
+                Birthday
+              </h2>
+            </SlideInRight>
+
+            {/* Recipient Name - Inter */}
+            <TextReveal delay={0.7}>
+              <motion.h3
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mt-4 sm:mt-6 text-white/90"
+                style={{ fontFamily: 'var(--font-inter)' }}
+              >
+                {card.recipient_name}
+              </motion.h3>
+            </TextReveal>
+
+            {/* Sender Section */}
+            {card.sender_name && (
+              <FadeUp delay={0.9}>
+                <div className="mt-4 sm:mt-6">
+                  <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 sm:px-6 sm:py-3 rounded-full border border-white/30">
+                    <Cpu className="w-4 h-4 sm:w-5 sm:h-5 text-white/80" />
+                    <span 
+                      className="text-sm sm:text-base md:text-lg text-white/90"
+                      style={{ fontFamily: 'var(--font-poppins)' }}
+                    >
+                      From {card.sender_name}
+                    </span>
+                  </div>
+                </div>
+              </FadeUp>
+            )}
+          </div>
+        </FadeUp>
+
+        {/* Photo Section - Bento Grid Style */}
+        <PhotoReveal delay={1.1}>
+          <div className="mb-6 sm:mb-8">
+            <div className="max-w-5xl lg:max-w-6xl mx-auto">
+              {/* Glassmorphism photo container */}
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white/10 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-3 sm:p-4 shadow-2xl border border-white/20"
+              >
+                <PhotoLayout 
+                  photos={card.photos} 
+                  coverPhoto={card.cover_photo}
+                />
+              </motion.div>
             </div>
           </div>
-        </motion.div>
+        </PhotoReveal>
 
-        {/* Glassmorphism message card */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.8 }}
-          className="px-4 pb-16"
-        >
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-10 md:p-14 shadow-2xl border border-white/20 relative">
-              {/* Decorative sparkles */}
-              <div className="absolute top-6 right-6">
+        {/* Glassmorphism Message Card */}
+        <ScaleIn delay={1.3}>
+          <div className="max-w-4xl lg:max-w-5xl mx-auto mb-6 sm:mb-8">
+            {/* Modern glassmorphism card */}
+            <div className="bg-white/15 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 lg:p-14 shadow-2xl border border-white/20 relative">
+              {/* Decorative sparkle */}
+              <motion.div
+                initial={{ opacity: 0, rotate: -180 }}
+                animate={{ opacity: 1, rotate: 0 }}
+                transition={{ delay: 1.5, duration: 0.8 }}
+                className="absolute top-4 right-4 sm:top-6 sm:right-6"
+              >
                 <motion.div
                   animate={{ rotate: [0, 360] }}
                   transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
                 >
-                  <Sparkles className="w-10 h-10 text-white/60" />
+                  <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-white/60" />
                 </motion.div>
-              </div>
+              </motion.div>
               
-              <p
-                className="text-2xl md:text-3xl text-center leading-relaxed text-white"
-                style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+              {/* Message with modern typography */}
+              <TextReveal delay={1.5}>
+                <p
+                  className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center leading-relaxed text-white"
+                  style={{ fontFamily: 'var(--font-poppins)' }}
+                >
+                  {card.message}
+                </p>
+              </TextReveal>
+              
+              {/* Decorative zap */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.7, duration: 0.8 }}
+                className="flex justify-center mt-6 sm:mt-8"
               >
-                {card.message}
-              </p>
-              
-              <div className="flex justify-center mt-8">
                 <motion.div
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  <Zap className="w-12 h-12 text-white/80" fill="currentColor" />
+                  <Zap className="w-10 h-10 sm:w-12 sm:h-12 text-white/80" fill="currentColor" />
                 </motion.div>
-              </div>
+              </motion.div>
             </div>
           </div>
-        </motion.div>
+        </ScaleIn>
 
-        {/* Footer */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.1, duration: 0.8 }}
-          className="text-center py-8 px-4"
-        >
-          <p className="text-white/70 text-lg" style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}>
-            Celebrate in style ✨
-          </p>
-        </motion.div>
+        {/* Brand Footer */}
+        <BrandFooter template="modern" />
       </div>
     </div>
   );

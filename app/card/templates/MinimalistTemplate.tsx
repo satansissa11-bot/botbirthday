@@ -4,9 +4,11 @@ import { useState, useEffect } from 'react';
 import { BirthdayCard } from '@/lib/types';
 import { getTemplate } from '@/lib/templateRegistry';
 import '@/templates';
-import Slideshow from '@/components/Slideshow';
+import PhotoLayout from '@/components/PhotoLayout';
 import MusicPlayer from '@/components/MusicPlayer';
 import Confetti from '@/components/Confetti';
+import BrandFooter from '@/components/BrandFooter';
+import { FadeUp, TextReveal, PhotoReveal, ScaleIn } from '@/components/animations/PremiumAnimations';
 import { motion } from 'framer-motion';
 
 interface MinimalistTemplateProps {
@@ -24,7 +26,7 @@ export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
   return (
     <div className="min-h-screen relative overflow-hidden bg-white">
       {/* Clean white background with subtle texture */}
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,0,0,0.02),transparent_50%)]" />
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,0,0,0.01),transparent_50%)]" />
 
       {/* Confetti */}
       {showConfetti && <Confetti />}
@@ -33,91 +35,84 @@ export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
       <MusicPlayer musicUrl={card.music_url || template?.music?.defaultUrl} />
 
       {/* Main content */}
-      <div className="relative z-10 min-h-screen flex flex-col">
-        {/* Clean header */}
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="text-center pt-20 pb-8 px-4"
-        >
-          <h1 
-            className="text-4xl md:text-6xl font-semibold mb-4 text-gray-900"
-            style={{ 
-              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-              letterSpacing: '-0.02em',
-            }}
-          >
-            Happy Birthday
-          </h1>
-          <motion.h2
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-2xl sm:text-3xl md:text-5xl font-medium text-gray-700"
-            style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
-          >
-            {card.recipient_name}
-          </motion.h2>
-          {card.sender_name && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-base sm:text-lg md:text-xl text-gray-500 mt-2"
-              style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
-            >
-              From {card.sender_name}
-            </motion.p>
-          )}
-        </motion.div>
+      <div className="relative z-10 min-h-screen flex flex-col px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        {/* Hero Section */}
+        <FadeUp delay={0.2}>
+          <div className="text-center mb-8 sm:mb-12">
+            {/* Happy Birthday - Inter font */}
+            <TextReveal delay={0.3}>
+              <h1 
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold mb-4 sm:mb-6 text-gray-900"
+                style={{ 
+                  fontFamily: 'var(--font-inter)',
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                Happy Birthday
+              </h1>
+            </TextReveal>
 
-        {/* Clean photo gallery */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="flex-1 px-4 pb-8"
-        >
-          <div className="max-w-5xl mx-auto">
-            <div className="bg-gray-50 rounded-2xl p-2">
-              <div className="rounded-xl overflow-hidden">
-                <Slideshow photos={card.photos} autoPlay={true} interval={6000} coverPhoto={card.cover_photo} />
+            {/* Recipient Name - Inter */}
+            <TextReveal delay={0.5}>
+              <motion.h2
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-gray-700"
+                style={{ fontFamily: 'var(--font-inter)' }}
+              >
+                {card.recipient_name}
+              </motion.h2>
+            </TextReveal>
+
+            {/* Sender Section */}
+            {card.sender_name && (
+              <FadeUp delay={0.7}>
+                <div className="mt-4 sm:mt-6">
+                  <span 
+                    className="text-sm sm:text-base md:text-lg text-gray-500"
+                    style={{ fontFamily: 'var(--font-inter)' }}
+                  >
+                    From {card.sender_name}
+                  </span>
+                </div>
+              </FadeUp>
+            )}
+          </div>
+        </FadeUp>
+
+        {/* Photo Section - Clean and Minimal */}
+        <PhotoReveal delay={0.9}>
+          <div className="mb-8 sm:mb-12">
+            <div className="max-w-4xl lg:max-w-5xl mx-auto">
+              {/* Clean photo container */}
+              <div className="bg-gray-50 rounded-2xl sm:rounded-3xl p-2 sm:p-3">
+                <PhotoLayout 
+                  photos={card.photos} 
+                  coverPhoto={card.cover_photo}
+                />
               </div>
             </div>
           </div>
-        </motion.div>
+        </PhotoReveal>
 
-        {/* Minimal message card */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.6 }}
-          className="px-4 pb-16"
-        >
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-white rounded-2xl p-10 md:p-14 shadow-sm border border-gray-100">
-              <p
-                className="text-xl md:text-2xl text-center leading-relaxed text-gray-800"
-                style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
-              >
-                {card.message}
-              </p>
+        {/* Apple-style Message Card */}
+        <ScaleIn delay={1.1}>
+          <div className="max-w-2xl lg:max-w-3xl mx-auto mb-8 sm:mb-12">
+            {/* Apple-style card */}
+            <div className="bg-white rounded-2xl sm:rounded-3xl p-8 sm:p-12 md:p-16 lg:p-20 shadow-sm border border-gray-100">
+              {/* Message with clean typography */}
+              <TextReveal delay={1.3}>
+                <p
+                  className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center leading-relaxed text-gray-800"
+                  style={{ fontFamily: 'var(--font-inter)' }}
+                >
+                  {card.message}
+                </p>
+              </TextReveal>
             </div>
           </div>
-        </motion.div>
+        </ScaleIn>
 
-        {/* Footer */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9, duration: 0.6 }}
-          className="text-center py-8 px-4"
-        >
-          <p className="text-gray-400 text-sm" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
-            Made with care
-          </p>
-        </motion.div>
+        {/* Brand Footer */}
+        <BrandFooter template="minimalist" />
       </div>
     </div>
   );
