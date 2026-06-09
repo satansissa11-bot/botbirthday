@@ -69,12 +69,15 @@ export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
         <motion.div 
           ref={heroRef}
           style={{ opacity: heroOpacity, scale: heroScale }}
-          className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative"
+          className="min-h-screen flex flex-col items-center justify-center px-0 sm:px-1 lg:px-2 py-0 relative overflow-hidden"
         >
-          {/* Happy Birthday - Inter font */}
+          {/* Premium gradient overlay for depth */}
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-950/40 via-transparent to-gray-950/60 pointer-events-none" />
+          
+          {/* Happy Birthday - Inter font - smaller to create hierarchy */}
           <TextReveal delay={0.3}>
             <motion.h1 
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-semibold mb-4 sm:mb-6 text-white tracking-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold mb-0 sm:mb-1 text-white tracking-tight relative z-10"
               style={{ 
                 fontFamily: 'var(--font-inter)',
                 letterSpacing: '-0.03em',
@@ -84,25 +87,25 @@ export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
             </motion.h1>
           </TextReveal>
 
-          {/* Recipient Name - Inter */}
+          {/* Recipient Name - ABSOLUTE DOMINANT VISUAL CENTERPIECE */}
           <TextReveal delay={0.5}>
             <motion.h2
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-medium text-gray-300 tracking-tight"
-              style={{ fontFamily: 'var(--font-inter)' }}
+              className="text-[4rem] sm:text-[6rem] md:text-[9rem] lg:text-[12rem] xl:text-[14rem] font-medium text-gray-300 tracking-tight leading-none px-1 sm:px-2"
+              style={{ fontFamily: 'var(--font-inter)', filter: 'drop-shadow(0 0 100px rgba(255, 255, 255, 0.25)) drop-shadow(0 0 150px rgba(255, 255, 255, 0.15)) drop-shadow(0 0 200px rgba(255, 255, 255, 0.08))' }}
             >
               {card.recipient_name}
             </motion.h2>
           </TextReveal>
 
-          {/* Sender Section */}
+          {/* Sender Section - elegant and minimal */}
           {card.sender_name && (
             <FadeUp delay={0.7}>
-              <div className="mt-6 sm:mt-8">
+              <div className="mt-1 sm:mt-2 relative z-10">
                 <span 
-                  className="text-base sm:text-lg md:text-xl text-gray-400 tracking-wide"
+                  className="text-lg sm:text-xl md:text-2xl text-gray-400 tracking-wide font-light"
                   style={{ fontFamily: 'var(--font-inter)' }}
                 >
-                  From {card.sender_name}
+                  {card.sender_name}
                 </span>
               </div>
             </FadeUp>
@@ -113,14 +116,14 @@ export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 1 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10"
           >
             <motion.div
-              animate={{ y: [0, 12, 0] }}
+              animate={{ y: [0, 18, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="text-gray-500"
+              className="text-gray-500/90"
             >
-              <ArrowDown className="w-6 h-6 sm:w-8 sm:h-8" />
+              <ArrowDown className="w-7 h-7 sm:w-8 sm:h-8" />
             </motion.div>
           </motion.div>
         </motion.div>
@@ -170,31 +173,34 @@ export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
           </motion.div>
         )}
 
-        {/* SECTION 3: Premium Editorial Photo Sections */}
+        {/* SECTION 3: Premium Editorial Photo Sections - EDGE-TO-EDGE 90% VIEWPORT */}
         {allPhotos.length > 1 && (
-          <div className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-950 to-gray-900">
-            <div className="max-w-6xl mx-auto">
+          <div className="py-2 sm:py-3 lg:py-4 px-0 sm:px-1 lg:px-2 bg-gradient-to-b from-gray-950 to-gray-900">
+            <div className="w-full max-w-[1800px] mx-auto px-1 sm:px-2 lg:px-4">
               {allPhotos.slice(1).map((photo, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 80 }}
+                  initial={{ opacity: 0, y: 120 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-100px' }}
-                  transition={{ duration: 1, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  className="mb-8 sm:mb-12 last:mb-0"
+                  viewport={{ once: true, margin: '-200px' }}
+                  transition={{ duration: 1.5, delay: index * 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  className="mb-6 sm:mb-8 last:mb-0"
                 >
                   <div className="relative group">
-                    {/* Minimalist frame with subtle border */}
-                    <div className="relative overflow-hidden rounded-lg sm:rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
-                      <div className="aspect-[16/9] sm:aspect-[21/9]">
+                    {/* Minimalist frame - edge-to-edge feeling, 90% viewport width */}
+                    <div className="relative overflow-hidden rounded-3xl sm:rounded-4xl bg-white/5 backdrop-blur-2xl border border-white/20 shadow-[0_60px_120px_-30px_rgba(0,0,0,0.7)]">
+                      <div className="aspect-[14/9] sm:aspect-[16/9] md:aspect-[18/9] lg:aspect-[20/9] xl:aspect-[22/9]">
                         <Image
                           src={photo}
                           alt={`Memory ${index + 2}`}
                           fill
-                          className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          className="object-cover transition-transform duration-1200 group-hover:scale-105"
                           sizes="100vw"
                         />
                       </div>
+                      {/* Premium gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-gray-950/60 via-transparent to-gray-950/40" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-gray-950/40 via-transparent to-gray-950/40" />
                     </div>
                   </div>
                 </motion.div>
@@ -203,37 +209,37 @@ export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
           </div>
         )}
 
-        {/* SECTION 4: Emotional Message Centerpiece - 200% Larger */}
-        <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-gray-900 to-gray-950">
-          <div className="max-w-6xl mx-auto w-full">
+        {/* SECTION 4: Emotional Message Centerpiece - DRAMATICALLY LARGER 300% */}
+        <div className="min-h-screen flex items-center justify-center px-0 sm:px-1 lg:px-2 py-2 sm:py-3 lg:py-4 bg-gradient-to-b from-gray-900 to-gray-950">
+          <div className="w-full max-w-[1800px] mx-auto px-2 sm:px-4 lg:px-6">
             <ScaleIn delay={0.2}>
-              <div className="bg-white/5 backdrop-blur-xl rounded-none p-8 sm:p-12 md:p-20 lg:p-28 border border-white/10">
-                {/* Greeting - Much larger */}
+              <div className="bg-white/15 backdrop-blur-3xl rounded-5xl sm:rounded-6xl md:rounded-7xl lg:rounded-8xl p-12 sm:p-16 md:p-28 lg:p-36 border border-white/30 shadow-[0_80px_160px_-40px_rgba(0,0,0,0.7)]">
+                {/* Greeting - DRAMATICALLY LARGER */}
                 <TextReveal delay={0.4}>
                   <motion.p
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white mb-8 sm:mb-12 tracking-tight"
-                    style={{ fontFamily: 'var(--font-inter)' }}
+                    className="text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] text-white mb-10 sm:mb-12 tracking-tight leading-none"
+                    style={{ fontFamily: 'var(--font-inter)', filter: 'drop-shadow(0 0 60px rgba(255, 255, 255, 0.2)) drop-shadow(0 0 120px rgba(255, 255, 255, 0.1)) drop-shadow(0 0 180px rgba(255, 255, 255, 0.05))' }}
                   >
                     Dear {card.recipient_name},
                   </motion.p>
                 </TextReveal>
                 
-                {/* Message body - Significantly larger and emotional centerpiece */}
+                {/* Message body - DRAMATICALLY LARGER and emotional centerpiece */}
                 <TextReveal delay={0.6}>
                   <motion.p
-                    className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-center leading-relaxed text-gray-200 mb-8 sm:mb-12 font-light"
-                    style={{ fontFamily: 'var(--font-inter)' }}
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-center leading-relaxed text-gray-200 mb-10 sm:mb-12 font-light"
+                    style={{ fontFamily: 'var(--font-inter)', lineHeight: '1.7' }}
                   >
                     {card.message}
                   </motion.p>
                 </TextReveal>
 
-                {/* Signature - Larger */}
+                {/* Signature - DRAMATICALLY LARGER */}
                 {card.sender_name && (
                   <TextReveal delay={0.8}>
                     <motion.div className="text-center">
                       <motion.p
-                        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-gray-400 tracking-wide"
+                        className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] text-gray-400 tracking-wide"
                         style={{ fontFamily: 'var(--font-inter)' }}
                       >
                         — {card.sender_name}
@@ -247,64 +253,64 @@ export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
         </div>
 
         {/* SECTION 5: Celebration Finale with Share & QR */}
-        <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 bg-gray-950 relative overflow-hidden">
+        <div className="min-h-screen flex flex-col items-center justify-center px-0 sm:px-1 lg:px-2 py-2 sm:py-3 lg:py-4 bg-gray-950 relative overflow-hidden">
           {/* Animated subtle circles */}
-          {[...Array(24)].map((_, i) => (
+          {[...Array(30)].map((_, i) => (
             <motion.div
               key={i}
               className="absolute"
               style={{
-                left: `${5 + (i * 4)}%`,
-                top: `${10 + (i % 4) * 20}%`,
+                left: `${4 + (i * 3.5)}%`,
+                top: `${8 + (i % 5) * 18}%`,
               }}
               animate={{
-                y: [0, -30, 0],
-                opacity: [0.05, 0.2, 0.05],
-                scale: [1, 1.5, 1],
+                y: [0, -50, 0],
+                opacity: [0.1, 0.4, 0.1],
+                scale: [1, 2.5, 1],
               }}
               transition={{
-                duration: 4 + Math.random() * 2,
+                duration: 6 + Math.random() * 2,
                 repeat: Infinity,
                 delay: Math.random() * 0.5,
               }}
             >
-              <div className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-white/10" />
+              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white/10" />
             </motion.div>
           ))}
           
-          {/* Center circle with glow */}
+          {/* Center circle with glow - larger */}
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.2, delay: 0.3 }}
-            className="flex justify-center mb-8 sm:mb-12"
+            className="flex justify-center mb-10 sm:mb-12"
           >
             <motion.div
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 3, repeat: Infinity }}
+              animate={{ scale: [1, 1.4, 1] }}
+              transition={{ duration: 5, repeat: Infinity }}
               className="relative"
             >
-              <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full bg-white/10" />
+              <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:w-56 rounded-full bg-white/10" />
               <motion.div
-                animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.6, 0.3] }}
-                transition={{ duration: 3, repeat: Infinity }}
+                animate={{ scale: [1, 1.8, 1], opacity: [0.3, 0.8, 0.3] }}
+                transition={{ duration: 5, repeat: Infinity }}
                 className="absolute inset-0 bg-white/20 rounded-full blur-3xl"
               />
             </motion.div>
           </motion.div>
 
-          {/* Final message */}
+          {/* Final message - LARGER */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="text-center mb-10 sm:mb-14"
+            className="text-center mb-12 sm:mb-14"
           >
             <motion.p
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white tracking-tight"
-              style={{ fontFamily: 'var(--font-inter)' }}
+              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] text-white tracking-tight"
+              style={{ fontFamily: 'var(--font-inter)', filter: 'drop-shadow(0 0 60px rgba(255, 255, 255, 0.2)) drop-shadow(0 0 120px rgba(255, 255, 255, 0.1))' }}
             >
               With love
             </motion.p>
@@ -316,25 +322,25 @@ export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.7 }}
-            className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center justify-center mb-8 sm:mb-12"
+            className="flex flex-col sm:flex-row gap-5 sm:gap-7 items-center justify-center mb-10 sm:mb-12"
           >
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleShare}
-              className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-8 py-4 sm:px-10 sm:py-5 rounded-full border border-white/20 text-white hover:bg-white/20 transition-all shadow-xl"
+              className="flex items-center gap-5 bg-white/20 backdrop-blur-2xl px-10 py-5 sm:px-12 sm:py-6 rounded-full border border-white/40 text-white hover:bg-white/30 transition-all shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)]"
             >
-              <Share2 className="w-5 h-5 sm:w-6 sm:h-6" />
-              <span className="text-base sm:text-lg font-medium">Share</span>
+              <Share2 className="w-7 h-7 sm:w-8 sm:h-8" />
+              <span className="text-xl sm:text-2xl font-medium">Share</span>
             </motion.button>
             
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-8 py-4 sm:px-10 sm:py-5 rounded-full border border-white/20 text-white hover:bg-white/20 transition-all shadow-xl"
+              className="flex items-center gap-5 bg-white/20 backdrop-blur-2xl px-10 py-5 sm:px-12 sm:py-6 rounded-full border border-white/40 text-white hover:bg-white/30 transition-all shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)]"
             >
-              <Download className="w-5 h-5 sm:w-6 sm:h-6" />
-              <span className="text-base sm:text-lg font-medium">Save</span>
+              <Download className="w-7 h-7 sm:w-8 sm:h-8" />
+              <span className="text-xl sm:text-2xl font-medium">Save</span>
             </motion.button>
           </motion.div>
 
@@ -344,17 +350,17 @@ export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.9 }}
-            className="bg-white/5 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl"
+            className="bg-white/15 backdrop-blur-2xl rounded-4xl p-8 sm:p-10 border border-white/30 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)]"
           >
             <div className="text-center">
               <motion.p
-                className="text-sm sm:text-base text-gray-400 mb-4"
+                className="text-lg sm:text-xl text-gray-400 mb-5"
                 style={{ fontFamily: 'var(--font-inter)' }}
               >
                 Scan to view on mobile
               </motion.p>
-              <div className="w-32 h-32 sm:w-40 sm:h-40 bg-white/10 rounded-xl flex items-center justify-center mx-auto">
-                <div className="text-gray-400 text-xs sm:text-sm">
+              <div className="w-36 h-36 sm:w-40 sm:h-40 bg-white/20 rounded-3xl flex items-center justify-center mx-auto">
+                <div className="text-gray-400 text-base sm:text-lg">
                   QR Code
                 </div>
               </div>
@@ -367,10 +373,10 @@ export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 1.1 }}
-            className="mt-10 sm:mt-14 text-center"
+            className="mt-12 sm:mt-14 text-center"
           >
             <motion.p
-              className="text-base sm:text-lg text-gray-500"
+              className="text-xl sm:text-2xl text-gray-500"
               style={{ fontFamily: 'var(--font-inter)' }}
             >
               Created with <span className="text-white">❤️</span> by Spectre
