@@ -2,16 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Gift, Sparkles, X, Play } from 'lucide-react';
 import Confetti from '@/components/Confetti';
 
 interface GiftOpeningProps {
   template: string;
   onOpen: () => void;
-  onSkip: () => void;
 }
 
-export default function GiftOpening({ template, onOpen, onSkip }: GiftOpeningProps) {
+export default function GiftOpening({ template, onOpen }: GiftOpeningProps) {
   const [isOpening, setIsOpening] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -46,21 +44,9 @@ export default function GiftOpening({ template, onOpen, onSkip }: GiftOpeningPro
     }, 800);
   };
 
-  const handleSkip = () => {
-    onSkip();
-  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
-      {/* Skip Button */}
-      <button
-        onClick={handleSkip}
-        className="absolute top-4 right-4 z-50 flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white rounded-full transition-all"
-      >
-        <span className="text-sm">Skip</span>
-        <X className="w-4 h-4" />
-      </button>
-
       {/* Sparkle Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(20)].map((_, i) => (

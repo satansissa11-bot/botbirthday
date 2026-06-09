@@ -54,10 +54,6 @@ export default function CardPage() {
     setCanPlayMusic(true);
   };
 
-  const handleGiftSkip = () => {
-    setShowGiftOpening(false);
-    setCanPlayMusic(true);
-  };
 
   const fetchCard = async () => {
     try {
@@ -101,7 +97,6 @@ export default function CardPage() {
       <GiftOpening
         template={card.template}
         onOpen={handleGiftOpen}
-        onSkip={handleGiftSkip}
       />
     );
   }
