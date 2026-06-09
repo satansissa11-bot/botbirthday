@@ -7,7 +7,6 @@ import '@/templates';
 import MusicPlayer from '@/components/MusicPlayer';
 import Confetti from '@/components/Confetti';
 import BrandFooter from '@/components/BrandFooter';
-import { FadeUp } from '@/components/animations/PremiumAnimations';
 import { motion } from 'framer-motion';
 import { Share2, Download } from 'lucide-react';
 import Image from 'next/image';
@@ -19,6 +18,7 @@ interface MinimalistTemplateProps {
 export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
   const template = getTemplate('minimalist');
   const [showConfetti, setShowConfetti] = useState(false);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
   useEffect(() => {
     setShowConfetti(true);
@@ -40,8 +40,20 @@ export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
     }
   };
 
+  const nextPhoto = () => {
+    if (allPhotos.length > 1) {
+      setCurrentPhotoIndex((prev) => (prev + 1) % allPhotos.length);
+    }
+  };
+
+  const prevPhoto = () => {
+    if (allPhotos.length > 1) {
+      setCurrentPhotoIndex((prev) => (prev - 1 + allPhotos.length) % allPhotos.length);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#fafafa] text-gray-900">
       {/* Confetti */}
       {showConfetti && <Confetti />}
       
@@ -50,170 +62,259 @@ export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
 
       {/* Main content */}
       <div className="relative z-10">
-        {/* SECTION 1: Full-screen Photo - Portfolio Style */}
+        {/* SECTION 1: Single Photo - Full Bleed */}
         {allPhotos.length > 0 && (
-          <div className="h-screen w-full relative">
-            <Image
-              src={allPhotos[0]}
-              alt="Portfolio photo"
-              fill
-              className="object-cover"
-              priority
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-black/20" />
-            
-            {/* Minimal text overlay */}
-            <div className="absolute bottom-12 left-12 right-12">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1 }}
-              >
-                <p className="text-white text-sm tracking-widest uppercase mb-2">
-                  Birthday
-                </p>
-                <h1 
-                  className="text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light"
-                  style={{ fontFamily: 'var(--font-inter)' }}
-                >
-                  {card.recipient_name}
-                </h1>
-              </motion.div>
-            </div>
-          </div>
-        )}
-
-        {/* SECTION 2: Minimal Text Statement */}
-        <div className="min-h-screen flex items-center justify-center p-12 sm:p-24 md:p-32">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="max-w-3xl text-center"
-          >
-            <p className="text-gray-400 text-xs tracking-widest uppercase mb-8">
-              Message
-            </p>
-            <p 
-              className="text-2xl sm:text-3xl md:text-4xl text-gray-900 leading-relaxed font-light"
-              style={{ fontFamily: 'var(--font-inter)', lineHeight: '1.8' }}
+          <div className="h-screen relative">
+            <motion.div
+              key={currentPhotoIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.5 }}
+              className="h-full relative"
             >
-              {card.message}
-            </p>
-            {card.sender_name && (
-              <p className="text-gray-400 text-sm mt-12">
-                — {card.sender_name}
-              </p>
+              <Image
+                src={allPhotos[currentPhotoIndex]}
+                alt="Portfolio"
+                fill
+                className="object-cover"
+                priority
+                sizes="100vw"
+              />
+            </motion.div>
+            
+            {/* Minimal navigation */}
+            {allPhotos.length > 1 && (
+              <>
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1 }}
+                  onClick={prevPhoto}
+                  className="absolute left-8 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors"
+                >
+                  <span className="text-2xl">←</span>
+                </motion.button>
+                
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1 }}
+                  onClick={nextPhoto}
+                  className="absolute right-8 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors"
+                >
+                  <span className="text-2xl">→</span>
+                </motion.button>
+                
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1 }}
+                  className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 text-sm"
+                >
+                  {currentPhotoIndex + 1} / {allPhotos.length}
+                </motion.div>
+              </>
             )}
-          </motion.div>
-        </div>
 
-        {/* SECTION 3: Full-screen Photo Gallery */}
-        {allPhotos.length > 1 && (
-          <div className="min-h-screen bg-gray-50 p-12 sm:p-24 md:p-32">
-            <div className="max-w-7xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="mb-16"
-              >
-                <p className="text-gray-400 text-xs tracking-widest uppercase mb-2">
-                  Gallery
-                </p>
-                <h2 
-                  className="text-gray-900 text-3xl sm:text-4xl md:text-5xl font-light"
-                  style={{ fontFamily: 'var(--font-inter)' }}
-                >
-                  Moments
-                </h2>
-              </motion.div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {allPhotos.slice(1, 5).map((photo, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="relative aspect-[4/5] overflow-hidden"
-                  >
-                    <Image
-                      src={photo}
-                      alt={`Gallery ${index + 1}`}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+            {/* Minimal text overlay */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5, delay: 0.5 }}
+              className="absolute bottom-16 left-16 right-16"
+            >
+              <p className="text-white/80 text-xs tracking-[0.3em] uppercase mb-4">
+                {card.recipient_name}
+              </p>
+            </motion.div>
           </div>
         )}
 
-        {/* SECTION 4: Clean Typography Statement */}
-        <div className="h-screen flex items-center justify-center p-12 sm:p-24 md:p-32 bg-white">
+        {/* SECTION 2: Single Word Statement */}
+        <div className="min-h-screen bg-[#fafafa] flex items-center justify-center p-16 md:p-24">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="text-center max-w-4xl"
+            transition={{ duration: 2 }}
+            className="max-w-4xl text-center"
           >
-            <h2 
-              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-gray-900 font-light leading-none"
-              style={{ fontFamily: 'var(--font-inter)' }}
+            <h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-light leading-relaxed text-gray-900"
+              style={{ fontFamily: 'serif', lineHeight: '1.8' }}
             >
-              Happy Birthday
-            </h2>
-            <p className="text-gray-400 text-lg sm:text-xl md:text-2xl mt-8 font-light">
               {card.recipient_name}
-            </p>
+            </h1>
           </motion.div>
         </div>
 
-        {/* SECTION 5: Minimal Actions */}
-        <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-12 sm:p-24 md:p-32">
+        {/* SECTION 3: Message - Floating Card */}
+        <div className="min-h-screen bg-[#f5f5f5] flex items-center justify-center p-8 md:p-16 relative overflow-hidden">
+          {/* Background photo with blur */}
+          {allPhotos.length > 0 && (
+            <div className="absolute inset-0">
+              <Image
+                src={allPhotos[0]}
+                alt="Background"
+                fill
+                className="object-cover opacity-10 blur-3xl"
+                sizes="100vw"
+              />
+            </div>
+          )}
+          
+          {/* Floating message card */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 100, rotate: -5 }}
+            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="text-center space-y-12 max-w-2xl"
+            transition={{ duration: 1.2 }}
+            className="relative max-w-2xl w-full"
           >
-            <p className="text-gray-400 text-xs tracking-widest uppercase">
-              Share
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <div className="bg-white p-8 sm:p-12 md:p-16 shadow-2xl">
+              <p 
+                className="text-gray-400 text-xs tracking-[0.3em] uppercase mb-8"
+                style={{ fontFamily: 'serif' }}
+              >
+                Personal Note
+              </p>
+              
+              <p 
+                className="text-2xl md:text-3xl lg:text-4xl leading-relaxed text-gray-900"
+                style={{ fontFamily: 'serif', lineHeight: '1.8' }}
+              >
+                {card.message}
+              </p>
+              
+              {card.sender_name && (
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 }}
+                  className="text-gray-400 text-sm mt-12 tracking-widest uppercase"
+                  style={{ fontFamily: 'serif' }}
+                >
+                  {card.sender_name}
+                </motion.p>
+              )}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* SECTION 4: Single Photo - Portrait */}
+        {allPhotos.length > 1 && (
+          <div className="min-h-screen bg-[#f5f5f5] flex items-center justify-center p-16 md:p-24">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 2 }}
+              className="max-w-3xl w-full"
+            >
+              <div className="aspect-[3/4] relative overflow-hidden bg-gray-200">
+                <Image
+                  src={allPhotos[1]}
+                  alt="Portrait"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 75vw"
+                />
+              </div>
+            </motion.div>
+          </div>
+        )}
+
+        {/* SECTION 5: Fade To White Finale */}
+        <div className="min-h-screen bg-[#fafafa] flex flex-col items-center justify-center p-16 md:p-24 relative overflow-hidden">
+          {/* Fade to white overlay */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 3 }}
+            className="absolute inset-0 bg-white pointer-events-none"
+          />
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 2 }}
+            className="text-center space-y-16 relative z-10"
+          >
+            {/* Minimal text */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="text-gray-400 text-xs tracking-widest uppercase"
+              style={{ fontFamily: 'serif' }}
+            >
+              —
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 1 }}
+              className="text-gray-900 text-2xl md:text-3xl lg:text-4xl font-light"
+              style={{ fontFamily: 'serif', lineHeight: '1.8' }}
+            >
+              {card.recipient_name}
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 1.5 }}
+              className="text-gray-400 text-xs tracking-widest uppercase"
+              style={{ fontFamily: 'serif' }}
+            >
+              —
+            </motion.p>
+
+            {/* Fade out actions */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 2 }}
+              className="flex flex-col gap-4"
+            >
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ opacity: 0.7 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={handleShare}
-                className="px-8 py-3 bg-gray-900 text-white text-sm font-medium rounded hover:bg-gray-800 transition-colors"
-                style={{ fontFamily: 'var(--font-inter)' }}
+                className="text-gray-900 text-sm tracking-widest uppercase hover:text-gray-600 transition-colors"
+                style={{ fontFamily: 'serif' }}
               >
                 Share
               </motion.button>
-              
+
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-3 border border-gray-300 text-gray-900 text-sm font-medium rounded hover:bg-gray-100 transition-colors"
-                style={{ fontFamily: 'var(--font-inter)' }}
+                whileHover={{ opacity: 0.7 }}
+                whileTap={{ scale: 0.98 }}
+                className="text-gray-900 text-sm tracking-widest uppercase hover:text-gray-600 transition-colors"
+                style={{ fontFamily: 'serif' }}
               >
                 Save
               </motion.button>
-            </div>
+            </motion.div>
 
-            <p className="text-gray-400 text-xs mt-16">
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 2.5 }}
+              className="text-gray-300 text-xs tracking-widest uppercase"
+              style={{ fontFamily: 'serif' }}
+            >
               Spectre
-            </p>
+            </motion.p>
           </motion.div>
         </div>
 
