@@ -1,7 +1,7 @@
 import { TemplateConfig } from '@/lib/types';
 
 const romanticTemplate: TemplateConfig = {
-  id: 'romantic',
+  id: 'romantic-new',
   name: 'Romantic',
   description: 'Pink/red luxury gradient with floating hearts and glassmorphism',
   category: 'romantic',

@@ -119,33 +119,34 @@ export default function CardPage() {
     );
   }
 
-  // Use template-specific layouts for new templates
+  // Use template-specific layouts for premium templates
   const templateId = template.id;
   
-  if (templateId === 'romantic-new') {
-    return <RomanticTemplate card={card} />;
-  }
+  // Premium templates with custom components
+  const premiumTemplates = ['romantic', 'romantic-new', 'cute', 'elegant', 'dark-luxury', 'modern', 'minimalist'];
   
-  if (templateId === 'cute') {
-    return <CuteTemplate card={card} />;
-  }
-  
-  if (templateId === 'elegant') {
-    return <ElegantTemplate card={card} />;
-  }
-  
-  if (templateId === 'dark-luxury') {
-    return <DarkLuxuryTemplate card={card} />;
-  }
-  
-  if (templateId === 'modern') {
-    return <ModernTemplate card={card} />;
-  }
-  
-  if (templateId === 'minimalist') {
-    return <MinimalistTemplate card={card} />;
+  if (premiumTemplates.includes(templateId)) {
+    if (templateId === 'romantic' || templateId === 'romantic-new') {
+      return <RomanticTemplate card={card} />;
+    }
+    if (templateId === 'cute') {
+      return <CuteTemplate card={card} />;
+    }
+    if (templateId === 'elegant') {
+      return <ElegantTemplate card={card} />;
+    }
+    if (templateId === 'dark-luxury') {
+      return <DarkLuxuryTemplate card={card} />;
+    }
+    if (templateId === 'modern') {
+      return <ModernTemplate card={card} />;
+    }
+    if (templateId === 'minimalist') {
+      return <MinimalistTemplate card={card} />;
+    }
   }
 
+  // Legacy templates use old fallback layout
   // Get template-specific effects component
   const getTemplateEffects = (templateId: string) => {
     switch (templateId) {
