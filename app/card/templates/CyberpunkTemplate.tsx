@@ -95,7 +95,7 @@ export default function CyberpunkTemplate({ card }: CyberpunkTemplateProps) {
               animate={{ opacity: [1, 0.5, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              // SYSTEM INITIALIZED
+              {/* // SYSTEM INITIALIZED */}
             </motion.p>
             
             <h1 
@@ -136,7 +136,7 @@ export default function CyberpunkTemplate({ card }: CyberpunkTemplateProps) {
                 className="mb-12"
               >
                 <p className="text-cyan-400 text-xs font-mono mb-2">
-                  // DATA STREAM
+                  {/* // DATA STREAM */}
                 </p>
                 <h2 
                   className="text-3xl sm:text-4xl md:text-5xl text-white font-black"
@@ -353,7 +353,7 @@ export default function CyberpunkTemplate({ card }: CyberpunkTemplateProps) {
             {/* Shutdown progress */}
             <div className="space-y-4">
               <p className="text-cyan-400 text-xs font-mono tracking-widest uppercase">
-                // SYSTEM SHUTDOWN INITIATED
+                {/* // SYSTEM SHUTDOWN INITIATED */}
               </p>
               
               {/* Progress bar */}

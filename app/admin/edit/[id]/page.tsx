@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { BirthdayCard } from '@/lib/types';
@@ -31,14 +31,7 @@ export default function EditCard() {
     music_url: '',
   });
 
-  useEffect(() => {
-    // Load templates from registry
-    const loadedTemplates = getAllTemplates();
-    setTemplates(loadedTemplates);
-    fetchCard();
-  }, [cardId]);
-
-  const fetchCard = async () => {
+  const fetchCard = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('birthday_cards')
@@ -47,7 +40,7 @@ export default function EditCard() {
         .single();
 
       if (error) throw error;
-      
+
       setCard(data);
       setFormData({
         recipient_name: data.recipient_name,
@@ -65,7 +58,14 @@ export default function EditCard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [cardId, router]);
+
+  useEffect(() => {
+    // Load templates from registry
+    const loadedTemplates = getAllTemplates();
+    setTemplates(loadedTemplates);
+    fetchCard();
+  }, [fetchCard]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

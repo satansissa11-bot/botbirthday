@@ -30,7 +30,7 @@ export default function MusicPlayer({ musicUrl, canPlay = true }: MusicPlayerPro
         // Auto-play was blocked, user needs to click play
       });
     }
-  }, [canPlay]);
+  }, [canPlay, isPlaying]);
 
   const togglePlay = () => {
     if (audioRef.current) {

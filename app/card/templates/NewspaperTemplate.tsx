@@ -136,7 +136,7 @@ export default function NewspaperTemplate({ card }: NewspaperTemplateProps) {
                   {/* Photo caption */}
                   <div className="absolute bottom-0 left-0 right-0 bg-stone-900/90 text-stone-100 p-4">
                     <p className="text-sm">
-                      Photo: Special Edition • {card.recipient_name}'s Birthday
+                      Photo: Special Edition • {card.recipient_name}&apos;s Birthday
                     </p>
                   </div>
                 </div>
@@ -244,11 +244,11 @@ export default function NewspaperTemplate({ card }: NewspaperTemplateProps) {
             <p className="text-stone-400 text-xs tracking-widest uppercase mb-4">
               Quote of the Day
             </p>
-            <blockquote 
+            <blockquote
               className="text-2xl sm:text-3xl md:text-4xl font-light italic leading-relaxed"
               style={{ fontFamily: 'serif' }}
             >
-              "Another year, another adventure. Happy Birthday!"
+              &ldquo;Another year, another adventure. Happy Birthday!&rdquo;
             </blockquote>
             <p className="text-stone-400 mt-4">— The Birthday Chronicle</p>
           </motion.div>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 import { BirthdayCard } from '@/lib/types';
 import { Edit, Trash2, Eye, Plus, BarChart3, Bot } from 'lucide-react';
@@ -99,11 +100,13 @@ export default function AllCards() {
           {cards.map((card) => (
             <div key={card.id} className="bg-white rounded-lg shadow overflow-hidden">
               {card.photos.length > 0 && (
-                <div className="h-48 overflow-hidden">
-                  <img
+                <div className="h-48 overflow-hidden relative">
+                  <Image
                     src={card.photos[0]}
                     alt={card.recipient_name}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
               )}

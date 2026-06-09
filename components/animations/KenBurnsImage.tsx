@@ -11,12 +11,12 @@ interface KenBurnsImageProps {
   className?: string;
 }
 
-export default function KenBurnsImage({ 
-  src, 
-  alt, 
-  duration = 10, 
+export default function KenBurnsImage({
+  src,
+  alt,
+  duration = 10,
   scale = 1.1,
-  className = '' 
+  className = ''
 }: KenBurnsImageProps) {
   return (
     <motion.div
@@ -36,12 +36,14 @@ export default function KenBurnsImage({
           repeat: Infinity,
           ease: 'easeInOut',
         }}
-        className="w-full h-full"
+        className="w-full h-full relative"
       >
-        <img
+        <Image
           src={src}
           alt={alt}
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
+          sizes="100vw"
         />
       </motion.div>
     </motion.div>

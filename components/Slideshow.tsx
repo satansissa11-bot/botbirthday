@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 interface SlideshowProps {
   photos: string[];
@@ -71,14 +72,16 @@ export default function Slideshow({ photos, autoPlay = true, interval = 3000, ke
 
   if (orderedPhotos.length === 1) {
     return (
-      <div className="w-full h-full">
+      <div className="w-full h-full relative">
         {kenBurns ? (
           <KenBurnsImage src={orderedPhotos[0]} alt="Birthday photo" duration={10} scale={1.1} />
         ) : (
-          <img
+          <Image
             src={orderedPhotos[0]}
             alt="Birthday photo"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            sizes="100vw"
           />
         )}
       </div>
@@ -88,10 +91,8 @@ export default function Slideshow({ photos, autoPlay = true, interval = 3000, ke
   return (
     <div className="relative w-full h-full overflow-hidden">
       <AnimatePresence initial={false} custom={direction} mode="popLayout">
-        <motion.img
+        <motion.div
           key={currentIndex}
-          src={orderedPhotos[currentIndex]}
-          alt={`Photo ${currentIndex + 1}`}
           custom={direction}
           variants={variants}
           initial="enter"
@@ -101,14 +102,22 @@ export default function Slideshow({ photos, autoPlay = true, interval = 3000, ke
             x: { type: 'spring', stiffness: 300, damping: 30 },
             opacity: { duration: 0.2 },
           }}
-          className={cn(
-            'absolute inset-0 w-full h-full object-cover',
-            kenBurns && 'ken-burns'
-          )}
-          style={kenBurns ? {
-            animation: `kenBurns ${interval * 2}ms ease-in-out infinite alternate`,
-          } : {}}
-        />
+          className="absolute inset-0"
+        >
+          <Image
+            src={orderedPhotos[currentIndex]}
+            alt={`Photo ${currentIndex + 1}`}
+            fill
+            className={cn(
+              'object-cover',
+              kenBurns && 'ken-burns'
+            )}
+            sizes="100vw"
+            style={kenBurns ? {
+              animation: `kenBurns ${interval * 2}ms ease-in-out infinite alternate`,
+            } : {}}
+          />
+        </motion.div>
       </AnimatePresence>
       
       {/* Navigation buttons */}
@@ -152,7 +161,7 @@ export default function Slideshow({ photos, autoPlay = true, interval = 3000, ke
 function KenBurnsImage({ src, alt, duration = 10, scale = 1.1 }: { src: string; alt: string; duration?: number; scale?: number }) {
   return (
     <motion.div
-      className="w-full h-full"
+      className="w-full h-full relative"
       animate={{
         scale: [1, scale, 1],
         x: [0, -20, 0],
@@ -164,10 +173,12 @@ function KenBurnsImage({ src, alt, duration = 10, scale = 1.1 }: { src: string; 
         ease: 'easeInOut',
       }}
     >
-      <img
+      <Image
         src={src}
         alt={alt}
-        className="w-full h-full object-cover"
+        fill
+        className="object-cover"
+        sizes="100vw"
       />
     </motion.div>
   );

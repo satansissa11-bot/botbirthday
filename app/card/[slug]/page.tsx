@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { BirthdayCard } from '@/lib/types';
@@ -37,25 +37,12 @@ export default function CardPage() {
   const [showGiftOpening, setShowGiftOpening] = useState(true);
   const [canPlayMusic, setCanPlayMusic] = useState(false);
 
-  useEffect(() => {
-    fetchCard();
-  }, [slug]);
-
-  useEffect(() => {
-    if (card && !showConfetti) {
-      setShowConfetti(true);
-      // Track card view
-      trackCardView(card.id);
-    }
-  }, [card]);
-
   const handleGiftOpen = () => {
     setShowGiftOpening(false);
     setCanPlayMusic(true);
   };
 
-
-  const fetchCard = async () => {
+  const fetchCard = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('birthday_cards')
@@ -70,7 +57,19 @@ export default function CardPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [slug]);
+
+  useEffect(() => {
+    fetchCard();
+  }, [fetchCard]);
+
+  useEffect(() => {
+    if (card && !showConfetti) {
+      setShowConfetti(true);
+      // Track card view
+      trackCardView(card.id);
+    }
+  }, [card, showConfetti]);
 
   if (loading) {
     return (

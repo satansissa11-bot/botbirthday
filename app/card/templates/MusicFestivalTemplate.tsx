@@ -378,12 +378,12 @@ export default function MusicFestivalTemplate({ card }: MusicFestivalTemplatePro
             
             <h2 
               className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white leading-none mb-8"
-              style={{ 
+              style={{
                 fontFamily: 'sans-serif',
                 textShadow: '0 0 40px rgba(236, 72, 153, 0.8), 0 0 80px rgba(236, 72, 153, 0.4)',
               }}
             >
-              LET'S PARTY
+              LET&apos;S PARTY
             </h2>
             
             <p className="text-orange-400 text-3xl font-black" style={{ fontFamily: 'sans-serif' }}>

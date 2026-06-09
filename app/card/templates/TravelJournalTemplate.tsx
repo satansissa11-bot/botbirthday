@@ -164,7 +164,7 @@ export default function TravelJournalTemplate({ card }: TravelJournalTemplatePro
                 </p>
                 
                 <p className="text-amber-800 text-xl leading-relaxed font-serif">
-                  Today marks the beginning of {card.recipient_name}'s birthday journey. A new chapter unfolds, filled with memories waiting to be made.
+                  Today marks the beginning of {card.recipient_name}&apos;s birthday journey. A new chapter unfolds, filled with memories waiting to be made.
                 </p>
                 
                 {card.sender_name && (

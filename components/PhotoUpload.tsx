@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { Upload, X, Image as ImageIcon } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 interface PhotoUploadProps {
   photos: string[];
@@ -113,11 +114,13 @@ export default function PhotoUpload({ photos, onPhotosChange, coverPhoto, onCove
       {photos.length > 0 && (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {photos.map((photo, index) => (
-            <div key={index} className="relative group">
-              <img
+            <div key={index} className="relative group h-32">
+              <Image
                 src={photo}
                 alt={`Uploaded photo ${index + 1}`}
-                className="w-full h-32 object-cover rounded-lg"
+                fill
+                className="object-cover rounded-lg"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               />
               <button
                 onClick={() => removePhoto(index)}
