@@ -194,7 +194,7 @@ export default function NewspaperTemplate({ card }: NewspaperTemplateProps) {
                   {/* Dramatic photo caption */}
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-stone-900 via-stone-900/95 to-transparent text-stone-100 p-6 border-t-4 border-stone-700">
                     <p className="text-sm font-bold tracking-wider" style={{ fontFamily: 'serif' }}>
-                      PHOTO: SPECIAL EDITION • {card.recipient_name}'S BIRTHDAY • EXCLUSIVE COVERAGE • HISTORIC MOMENT
+                      PHOTO: SPECIAL EDITION • {card.recipient_name}&apos;S BIRTHDAY • EXCLUSIVE COVERAGE • HISTORIC MOMENT
                     </p>
                   </div>
                 </div>

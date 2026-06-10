@@ -319,7 +319,7 @@ export default function LuxuryBlackGoldTemplate({ card }: LuxuryBlackGoldTemplat
                           Exclusive Shot {index + 1}
                         </p>
                         <p className="text-white text-sm font-light" style={{ fontFamily: 'serif' }}>
-                          {card.recipient_name}'s Collection
+                          {card.recipient_name}&apos;s Collection
                         </p>
                       </div>
                     </div>

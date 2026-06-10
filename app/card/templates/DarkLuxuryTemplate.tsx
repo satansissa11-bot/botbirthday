@@ -198,7 +198,7 @@ export default function DarkLuxuryTemplate({ card }: DarkLuxuryTemplateProps) {
                     transition={{ duration: 1, delay: 0.4 }}
                   >
                     <p className="text-amber-400 text-3xl sm:text-4xl md:text-5xl font-light italic leading-relaxed" style={{ fontFamily: 'serif' }}>
-                      "A celebration unlike any other"
+                      &ldquo;A celebration unlike any other&rdquo;
                     </p>
                   </motion.div>
 
@@ -294,7 +294,7 @@ export default function DarkLuxuryTemplate({ card }: DarkLuxuryTemplateProps) {
                               Look {index + 1}
                             </p>
                             <p className="text-white text-lg font-light" style={{ fontFamily: 'serif' }}>
-                              {card.recipient_name}'s Birthday Collection
+                              {card.recipient_name}&apos;s Birthday Collection
                             </p>
                           </div>
                           <div className="text-right">
@@ -384,7 +384,7 @@ export default function DarkLuxuryTemplate({ card }: DarkLuxuryTemplateProps) {
                 Subscribe Now
               </p>
               <p className="text-white text-3xl font-light mb-2" style={{ fontFamily: 'serif' }}>
-                {card.recipient_name}'s Birthday
+                {card.recipient_name}&apos;s Birthday
               </p>
               <p className="text-white/70 text-sm" style={{ fontFamily: 'serif' }}>
                 Limited Edition • MMXXIV

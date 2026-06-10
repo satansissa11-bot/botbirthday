@@ -482,7 +482,7 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
             </h2>
 
             <p className="text-gray-400 text-lg mb-12">
-              {card.recipient_name}'s special day
+              {card.recipient_name}&apos;s special day
             </p>
             
             {/* Stats */}

@@ -29,7 +29,7 @@ export default function TravelJournalTemplate({ card }: TravelJournalTemplatePro
     if (navigator.share) {
       try {
         await navigator.share({
-          title: `Adventure Map - ${card.recipient_name}'s Birthday Quest`,
+          title: `Adventure Map - ${card.recipient_name}&apos;s Birthday Quest`,
           text: card.message,
           url: window.location.href,
         });

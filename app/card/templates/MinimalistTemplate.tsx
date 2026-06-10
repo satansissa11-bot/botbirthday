@@ -227,7 +227,7 @@ export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
                 <p 
                   className="text-gray-400 text-xs tracking-[0.4em] uppercase mb-12 font-light"
                 >
-                  Curator's Note
+                  Curator&apos;s Note
                 </p>
                 
                 <p 
