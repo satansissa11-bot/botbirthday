@@ -62,31 +62,61 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
 
       {/* Main content */}
       <div className="relative z-10">
-        {/* SECTION 1: Hero - Product Launch Reveal */}
+        {/* SECTION 1: Modern Tech Hero with Dynamic Elements */}
         <div className="h-screen flex items-center justify-center relative overflow-hidden">
-          {/* Animated background gradient */}
+          {/* Animated mesh gradient */}
           <motion.div
             animate={{
               backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              scale: [1, 1.2, 1],
             }}
             transition={{
-              duration: 15,
+              duration: 20,
               repeat: Infinity,
               ease: 'linear',
             }}
-            className="absolute inset-0 bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900"
-            style={{ backgroundSize: '200% 200%' }}
+            className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 via-pink-900 to-orange-900"
+            style={{ backgroundSize: '300% 300%' }}
           />
           
-          {/* Grid overlay */}
-          <div className="absolute inset-0 opacity-10">
+          {/* Dynamic grid overlay */}
+          <div className="absolute inset-0 opacity-20">
             <div className="h-full w-full" style={{
               backgroundImage: `
                 linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
               `,
-              backgroundSize: '50px 50px'
+              backgroundSize: '40px 40px'
             }} />
+          </div>
+
+          {/* Floating orbs */}
+          <div className="absolute inset-0 pointer-events-none">
+            {[...Array(6)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute rounded-full blur-3xl"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  width: `${Math.random() * 400 + 200}px`,
+                  height: `${Math.random() * 400 + 200}px`,
+                }}
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0.3, 0.6, 0.3],
+                  x: [0, Math.random() * 100 - 50, 0],
+                  y: [0, Math.random() * 100 - 50, 0],
+                }}
+                transition={{
+                  duration: 8 + Math.random() * 4,
+                  repeat: Infinity,
+                  delay: Math.random() * 3,
+                }}
+              >
+                <div className={`w-full h-full ${i % 2 === 0 ? 'bg-blue-500/30' : 'bg-purple-500/30'}`} />
+              </motion.div>
+            ))}
           </div>
 
           <motion.div
@@ -98,8 +128,8 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.2 }}
             >
-              <p className="text-blue-400 text-lg md:text-xl font-semibold tracking-[0.3em] uppercase mb-6">
-                Introducing
+              <p className="text-cyan-400 text-lg md:text-xl font-semibold tracking-[0.3em] uppercase mb-6">
+                Welcome to
               </p>
             </motion.div>
             
@@ -111,7 +141,10 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
               style={{ 
                 fontFamily: 'var(--font-inter)',
                 letterSpacing: '-0.08em',
-                textShadow: '0 0 100px rgba(59, 130, 246, 0.5)'
+                background: 'linear-gradient(135deg, #fff 0%, #a855f7 50%, #3b82f6 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
               }}
             >
               {card.recipient_name}
@@ -123,9 +156,9 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
               transition={{ duration: 1, delay: 0.8 }}
               className="flex items-center justify-center gap-4 mt-8"
             >
-              <div className="w-16 h-px bg-gradient-to-r from-transparent to-blue-400" />
-              <Zap className="w-6 h-6 text-blue-400" />
-              <div className="w-16 h-px bg-gradient-to-l from-transparent to-blue-400" />
+              <div className="w-16 h-px bg-gradient-to-r from-transparent to-cyan-400" />
+              <Zap className="w-6 h-6 text-cyan-400" />
+              <div className="w-16 h-px bg-gradient-to-l from-transparent to-cyan-400" />
             </motion.div>
 
             <motion.p
@@ -134,7 +167,7 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
               transition={{ duration: 1, delay: 1 }}
               className="text-2xl md:text-3xl font-light text-gray-300 mt-8"
             >
-              The Next Generation
+              The Future is Here
             </motion.p>
 
             <motion.div
@@ -154,14 +187,22 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
           </motion.div>
         </div>
 
-        {/* SECTION 2: Feature Reveal - Bento Grid */}
+        {/* SECTION 2: Modern Bento Grid with Glassmorphism */}
         <div className="min-h-screen bg-black p-8 md:p-16 relative">
+          {/* Animated background */}
+          <div className="absolute inset-0 opacity-30">
+            <div className="h-full w-full" style={{
+              backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.1) 1px, transparent 0)',
+              backgroundSize: '60px 60px'
+            }} />
+          </div>
+
           <motion.div
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 1 }}
-            className="max-w-7xl mx-auto"
+            className="max-w-7xl mx-auto relative z-10"
           >
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -170,18 +211,18 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mb-16"
             >
-              <p className="text-blue-400 text-sm font-semibold tracking-[0.3em] uppercase mb-4">
-                Features
+              <p className="text-cyan-400 text-sm font-semibold tracking-[0.3em] uppercase mb-4">
+                Showcase
               </p>
               <h2 className="text-5xl md:text-7xl font-black leading-tight">
-                Designed for<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                  Excellence
+                Built for<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400">
+                  Innovation
                 </span>
               </h2>
             </motion.div>
 
-            {/* Dynamic bento grid */}
+            {/* Enhanced bento grid with glassmorphism */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
               {allPhotos.slice(0, 6).map((photo, index) => {
                 const isLarge = index === 0;
@@ -190,16 +231,16 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
                 return (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, scale: 0.8, rotate: index % 2 === 0 ? -5 : 5 }}
+                    whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     className={`
-                      relative overflow-hidden rounded-3xl bg-gray-900
+                      relative overflow-hidden rounded-3xl bg-gray-900/50 backdrop-blur-sm border border-white/10
                       ${isLarge ? 'md:col-span-2 md:row-span-2' : ''}
                       ${isWide ? 'md:col-span-2' : ''}
                     `}
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={{ scale: 1.03, borderColor: 'rgba(34, 211, 238, 0.5)' }}
                   >
                     <div className={`
                       relative w-full
@@ -212,13 +253,13 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                       
-                      {/* Feature label */}
+                      {/* Glassmorphism label */}
                       <div className="absolute bottom-4 left-4">
-                        <div className="bg-black/80 backdrop-blur-sm px-4 py-2 rounded-full">
+                        <div className="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full">
                           <p className="text-white text-sm font-semibold">
-                            Feature {index + 1}
+                            Moment {index + 1}
                           </p>
                         </div>
                       </div>
@@ -230,26 +271,27 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
           </motion.div>
         </div>
 
-        {/* SECTION 3: Typography Statement - Scroll Triggered */}
+        {/* SECTION 3: Kinetic Typography with Dynamic Background */}
         <div className="h-screen bg-gradient-to-b from-black via-gray-900 to-black flex items-center justify-center relative overflow-hidden">
-          {/* Animated particles */}
+          {/* Animated geometric shapes */}
           <div className="absolute inset-0">
-            {[...Array(20)].map((_, i) => (
+            {[...Array(15)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute bg-blue-500/20 rounded-full"
+                className="absolute border border-cyan-500/20 rounded-full"
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
-                  width: `${Math.random() * 300 + 100}px`,
-                  height: `${Math.random() * 300 + 100}px`,
+                  width: `${Math.random() * 200 + 50}px`,
+                  height: `${Math.random() * 200 + 50}px`,
                 }}
                 animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [0.2, 0.5, 0.2],
+                  scale: [1, 1.3, 1],
+                  rotate: [0, 180, 360],
+                  opacity: [0.1, 0.3, 0.1],
                 }}
                 transition={{
-                  duration: 4 + Math.random() * 2,
+                  duration: 6 + Math.random() * 3,
                   repeat: Infinity,
                   delay: Math.random() * 2,
                 }}
@@ -269,9 +311,9 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="text-blue-400 text-xl font-semibold tracking-[0.3em] uppercase mb-8"
+              className="text-cyan-400 text-xl font-semibold tracking-[0.3em] uppercase mb-8"
             >
-              Experience
+              Celebrate
             </motion.p>
             
             <motion.h2
@@ -290,7 +332,7 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.7 }}
-              className="text-6xl md:text-8xl lg:text-[10rem] xl:text-[12rem] font-black leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400"
+              className="text-6xl md:text-8xl lg:text-[10rem] xl:text-[12rem] font-black leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400"
               style={{ fontFamily: 'var(--font-inter)', letterSpacing: '-0.08em' }}
             >
               BIRTHDAY
@@ -298,19 +340,27 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
           </motion.div>
         </div>
 
-        {/* SECTION 4: Message - Split Screen */}
+        {/* SECTION 4: Modern Split Screen with Glassmorphism */}
         <div className="min-h-screen bg-black flex">
           {/* Left side - typography */}
-          <div className="w-1/2 flex items-center justify-center p-8 md:p-16 bg-gradient-to-br from-gray-900 to-black">
+          <div className="w-1/2 flex items-center justify-center p-8 md:p-16 bg-gradient-to-br from-gray-900 to-black relative">
+            {/* Animated pattern */}
+            <div className="absolute inset-0 opacity-20">
+              <div className="h-full w-full" style={{
+                backgroundImage: 'linear-gradient(45deg, rgba(34, 211, 238, 0.1) 25%, transparent 25%, transparent 50%, rgba(34, 211, 238, 0.1) 50%, rgba(34, 211, 238, 0.1) 75%, transparent 75%, transparent)',
+                backgroundSize: '40px 40px'
+              }} />
+            </div>
+
             <motion.div
               initial={{ opacity: 0, x: -100 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1 }}
-              className="max-w-xl"
+              className="max-w-xl relative z-10"
             >
-              <p className="text-blue-400 text-sm font-semibold tracking-[0.3em] uppercase mb-8">
-                Personal Message
+              <p className="text-cyan-400 text-sm font-semibold tracking-[0.3em] uppercase mb-8">
+                Message
               </p>
               
               <p 
@@ -336,7 +386,7 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
             </motion.div>
           </div>
           
-          {/* Right side - featured photo */}
+          {/* Right side - featured photo with glassmorphism */}
           {allPhotos.length > 0 && (
             <div className="w-1/2 relative">
               <motion.div
@@ -354,16 +404,19 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
                   sizes="50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                
+                {/* Glassmorphism overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 backdrop-blur-sm" />
               </motion.div>
             </div>
           )}
         </div>
 
-        {/* SECTION 5: Product Launch Complete */}
+        {/* SECTION 5: Modern Tech Finale with Celebration */}
         <div className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden">
-          {/* Success particles */}
+          {/* Celebration particles */}
           <div className="absolute inset-0 pointer-events-none">
-            {[...Array(30)].map((_, i) => (
+            {[...Array(40)].map((_, i) => (
               <motion.div
                 key={i}
                 className="absolute"
@@ -375,6 +428,7 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
                   y: [0, -1000],
                   opacity: [1, 0],
                   scale: [1, 0],
+                  rotate: [0, 360],
                 }}
                 transition={{
                   duration: 3 + Math.random() * 2,
@@ -382,7 +436,7 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
                   delay: Math.random() * 3,
                 }}
               >
-                <div className="w-2 h-2 bg-blue-400 rounded-full" />
+                <div className={`w-2 h-2 ${i % 3 === 0 ? 'bg-cyan-400' : i % 3 === 1 ? 'bg-purple-400' : 'bg-pink-400'} rounded-full`} />
               </motion.div>
             ))}
           </div>
@@ -402,7 +456,7 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="mb-12"
             >
-              <div className="w-32 h-32 mx-auto bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+              <div className="w-32 h-32 mx-auto bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-2xl shadow-purple-500/50">
                 <motion.div
                   initial={{ pathLength: 0 }}
                   whileInView={{ pathLength: 1 }}
@@ -418,25 +472,25 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
             </motion.div>
             
             <h2 className="text-5xl md:text-7xl font-black leading-tight mb-4">
-              LAUNCH
+              CELEBRATION
             </h2>
             
             <h2 className="text-5xl md:text-7xl font-black leading-tight mb-8">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400">
                 COMPLETE
               </span>
             </h2>
 
             <p className="text-gray-400 text-lg mb-12">
-              {card.recipient_name} is now live
+              {card.recipient_name}'s special day
             </p>
             
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 mb-12">
               {[
-                { label: 'VIEWS', value: '10K+' },
-                { label: 'LIKES', value: '5K+' },
-                { label: 'SHARES', value: '2K+' },
+                { label: 'MEMORIES', value: '∞' },
+                { label: 'LOVE', value: '100%' },
+                { label: 'JOY', value: 'MAX' },
               ].map((stat, index) => (
                 <motion.div
                   key={index}
@@ -457,13 +511,13 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button
-                whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(59, 130, 246, 0.5)' }}
+                whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(34, 211, 238, 0.5)' }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleShare}
-                className="px-8 py-5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-lg font-bold rounded-full hover:from-blue-400 hover:to-purple-400 transition-all min-h-[56px]"
+                className="px-8 py-5 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 text-white text-lg font-bold rounded-full hover:from-cyan-400 hover:via-purple-400 hover:to-pink-400 transition-all min-h-[56px]"
                 style={{ fontFamily: 'var(--font-inter)' }}
               >
-                Share Launch
+                Share Celebration
               </motion.button>
               
               <motion.button
@@ -472,7 +526,7 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
                 className="px-8 py-5 bg-white text-black text-lg font-bold rounded-full hover:bg-gray-100 transition-all min-h-[56px]"
                 style={{ fontFamily: 'var(--font-inter)' }}
               >
-                Save Report
+                Save Memory
               </motion.button>
             </div>
 

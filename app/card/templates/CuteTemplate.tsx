@@ -9,7 +9,7 @@ import Confetti from '@/components/Confetti';
 import BrandFooter from '@/components/BrandFooter';
 import { FadeUp } from '@/components/animations/PremiumAnimations';
 import { motion } from 'framer-motion';
-import { Star, Heart, Share2, Download } from 'lucide-react';
+import { Star, Heart, Share2, Download, Sparkles, Flower2 } from 'lucide-react';
 import Image from 'next/image';
 
 interface CuteTemplateProps {
@@ -41,7 +41,7 @@ export default function CuteTemplate({ card }: CuteTemplateProps) {
   };
 
   return (
-    <div className="min-h-screen bg-pink-50">
+    <div className="min-h-screen bg-gradient-to-br from-sage-50 via-blush-50 to-amber-50">
       {/* Confetti */}
       {showConfetti && <Confetti />}
       
@@ -50,99 +50,222 @@ export default function CuteTemplate({ card }: CuteTemplateProps) {
 
       {/* Main content */}
       <div className="relative z-10">
-        {/* SECTION 1: Split Screen Hero - Photo Left, Text Right */}
-        <div className="h-screen flex">
-          {/* Left side - Photo */}
-          <div className="w-1/2 relative bg-pink-100">
-            {allPhotos.length > 0 && (
-              <div className="h-full relative">
-                <Image
-                  src={allPhotos[0]}
-                  alt="Cover photo"
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="50vw"
-                />
-                {/* Decorative tape */}
-                <motion.div
-                  initial={{ x: -100 }}
-                  animate={{ x: 0 }}
-                  transition={{ delay: 0.5, duration: 0.8 }}
-                  className="absolute top-8 left-8 w-32 h-8 bg-yellow-400/80 rotate-2 shadow-md"
-                />
-              </div>
-            )}
-          </div>
+        {/* SECTION 1: Whimsical Garden Hero */}
+        <div className="h-screen relative overflow-hidden">
+          {/* Storybook background layers */}
+          <div className="absolute inset-0 bg-gradient-to-b from-sky-100 via-sage-100 to-amber-50" />
           
-          {/* Right side - Text */}
-          <div className="w-1/2 bg-pink-50 flex items-center justify-center p-8 sm:p-12 md:p-16 relative">
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="max-w-md"
-            >
-              {/* Sticker */}
+          {/* Layered garden elements */}
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Back layer - trees and bushes */}
+            <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-green-200/30 to-transparent" />
+            
+            {/* Middle layer - floating flowers */}
+            {[...Array(12)].map((_, i) => (
               <motion.div
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -top-12 -right-12"
+                key={i}
+                className="absolute"
+                style={{
+                  left: `${10 + i * 8}%`,
+                  top: `${20 + (i % 3) * 20}%`,
+                }}
+                animate={{
+                  y: [0, -15, 0],
+                  rotate: [0, 15, 0],
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  duration: 4 + i * 0.5,
+                  repeat: Infinity,
+                  delay: i * 0.3,
+                }}
               >
-                <Heart className="w-16 h-16 text-pink-500 fill-current" />
+                <Flower2 className={`w-8 h-8 ${i % 3 === 0 ? 'text-pink-300' : i % 3 === 1 ? 'text-purple-300' : 'text-amber-300'}`} />
               </motion.div>
-              
-              <p 
-                className="text-pink-400 text-sm tracking-[0.3em] uppercase mb-6"
-                style={{ fontFamily: 'var(--font-fredoka)' }}
+            ))}
+            
+            {/* Front layer - fireflies */}
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  opacity: [0.3, 1, 0.3],
+                  scale: [1, 1.5, 1],
+                  y: [0, -20, 0],
+                }}
+                transition={{
+                  duration: 3 + Math.random() * 2,
+                  repeat: Infinity,
+                  delay: Math.random() * 2,
+                }}
               >
-                Happy Birthday!
-              </p>
-              
-              <h1 
-                className="text-5xl sm:text-6xl md:text-7xl font-bold text-pink-600 leading-none mb-6"
-                style={{ fontFamily: 'var(--font-fredoka)' }}
-              >
-                {card.recipient_name}
-              </h1>
-              
-              <p className="text-gray-600 text-lg" style={{ fontFamily: 'var(--font-baloo-2)' }}>
-                A special day for a special person 🎂
-              </p>
-              
-              {/* Decorative tape */}
-              <div className="absolute -bottom-8 left-8 w-24 h-6 bg-pink-400/80 -rotate-3 shadow-md" />
-            </motion.div>
+                <div className="w-2 h-2 bg-amber-400 rounded-full shadow-lg shadow-amber-400/50" />
+              </motion.div>
+            ))}
           </div>
+
+          {/* Photo in storybook frame */}
+          {allPhotos.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, rotateY: 10 }}
+              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+              transition={{ duration: 1.2 }}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-96 relative"
+              style={{ perspective: '1000px' }}
+            >
+              {/* Storybook frame */}
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-100 to-sage-100 rounded-3xl shadow-2xl border-8 border-amber-300/50 p-4">
+                <div className="relative w-full h-full rounded-2xl overflow-hidden border-4 border-amber-200/50">
+                  <Image
+                    src={allPhotos[0]}
+                    alt="Cover photo"
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="320px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-amber-900/20 to-transparent" />
+                </div>
+              </div>
+              
+              {/* Gold corner decorations */}
+              <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-xl">
+                <Sparkles className="w-6 h-6 text-white" />
+              </div>
+              
+              {/* Floating petals */}
+              {[...Array(5)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute"
+                  style={{
+                    top: `${10 + i * 15}%`,
+                    right: `${-10 + i * 5}%`,
+                  }}
+                  animate={{
+                    y: [0, -10, 0],
+                    rotate: [0, 360],
+                  }}
+                  transition={{
+                    duration: 5 + i,
+                    repeat: Infinity,
+                    delay: i * 0.5,
+                  }}
+                >
+                  <div className={`w-4 h-4 rounded-full ${i % 2 === 0 ? 'bg-pink-300' : 'bg-purple-300'}`} />
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+
+          {/* Typography overlay */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="absolute bottom-16 left-0 right-0 text-center"
+          >
+            <p className="text-sage-600 text-sm tracking-[0.3em] uppercase mb-4 font-bold" style={{ fontFamily: 'serif' }}>
+              ✨ A Whimsical Celebration ✨
+            </p>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-sage-800 leading-none mb-4" style={{ fontFamily: 'serif' }}>
+              {card.recipient_name}
+            </h1>
+            <p className="text-sage-600 text-lg" style={{ fontFamily: 'serif' }}>
+              In a garden of dreams and wonder
+            </p>
+          </motion.div>
         </div>
 
-        {/* SECTION 2: Photo Collage - Scrapbook Style */}
+        {/* SECTION 2: Enchanted Garden Gallery */}
         {allPhotos.length > 1 && (
-          <div className="min-h-screen bg-white p-8 sm:p-12 md:p-16">
+          <div className="min-h-screen bg-gradient-to-br from-sage-100 via-blush-50 to-amber-50 p-8 sm:p-12 md:p-16 relative overflow-hidden">
+            {/* Layered garden background */}
+            <div className="absolute inset-0 pointer-events-none">
+              {/* Back layer - garden path */}
+              <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-green-100/40 to-transparent" />
+              
+              {/* Middle layer - floating flowers */}
+              {[...Array(15)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute"
+                  style={{
+                    left: `${5 + i * 6.5}%`,
+                    top: `${10 + (i % 4) * 20}%`,
+                  }}
+                  animate={{
+                    y: [0, -12, 0],
+                    rotate: [0, 20, 0],
+                    scale: [1, 1.15, 1],
+                  }}
+                  transition={{
+                    duration: 5 + i * 0.4,
+                    repeat: Infinity,
+                    delay: i * 0.25,
+                  }}
+                >
+                  <Flower2 className={`w-10 h-10 ${i % 4 === 0 ? 'text-pink-300' : i % 4 === 1 ? 'text-purple-300' : i % 4 === 2 ? 'text-amber-300' : 'text-rose-300'}`} />
+                </motion.div>
+              ))}
+              
+              {/* Front layer - fireflies */}
+              {[...Array(25)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                  }}
+                  animate={{
+                    opacity: [0.2, 0.8, 0.2],
+                    scale: [1, 1.4, 1],
+                    y: [0, -25, 0],
+                  }}
+                  transition={{
+                    duration: 3.5 + Math.random() * 2,
+                    repeat: Infinity,
+                    delay: Math.random() * 2,
+                  }}
+                >
+                  <div className="w-2.5 h-2.5 bg-amber-400 rounded-full shadow-lg shadow-amber-400/60" />
+                </motion.div>
+              ))}
+            </div>
+
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="max-w-6xl mx-auto"
+              className="max-w-6xl mx-auto relative z-10"
             >
-              <p className="text-gray-400 text-xs tracking-widest uppercase mb-8">
-                Memories
+              <p className="text-sage-600 text-xs tracking-widest uppercase mb-8 font-bold" style={{ fontFamily: 'serif' }}>
+                ✨ Garden Memories ✨
               </p>
               
-              {/* Collage grid with rotations */}
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+              {/* Storybook-style photo frames */}
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
                 {allPhotos.slice(1, 7).map((photo, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, rotate: index % 2 === 0 ? -5 : 5 }}
-                    whileInView={{ opacity: 1, rotate: 0 }}
+                    initial={{ opacity: 0, rotateY: index % 2 === 0 ? -15 : 15, scale: 0.85 }}
+                    whileInView={{ opacity: 1, rotateY: 0, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    transition={{ duration: 0.8, delay: index * 0.12 }}
+                    whileHover={{ scale: 1.08, rotateY: 5 }}
                     className="relative"
+                    style={{ perspective: '1000px' }}
                   >
-                    <div className="bg-white p-3 shadow-lg">
-                      <div className="aspect-square bg-gray-100 overflow-hidden">
+                    {/* Storybook frame */}
+                    <div className="relative aspect-square bg-gradient-to-br from-amber-50 to-sage-50 p-4 shadow-2xl rounded-2xl border-4 border-amber-200/50">
+                      <div className="relative w-full h-full rounded-xl overflow-hidden border-2 border-amber-100/50">
                         <Image
                           src={photo}
                           alt={`Memory ${index + 1}`}
@@ -150,10 +273,21 @@ export default function CuteTemplate({ card }: CuteTemplateProps) {
                           className="object-cover"
                           sizes="(max-width: 768px) 50vw, 33vw"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-t from-amber-900/15 to-transparent" />
                       </div>
                     </div>
-                    {/* Tape */}
-                    <div className={`absolute ${index % 2 === 0 ? '-top-2 left-4' : '-top-2 right-4'} w-16 h-4 bg-yellow-400/60 shadow-sm`} />
+                    
+                    {/* Gold corner decoration */}
+                    <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg">
+                      <Sparkles className="w-4 h-4 text-white" />
+                    </div>
+                    
+                    {/* Floating petal */}
+                    <motion.div
+                      animate={{ y: [0, -8, 0], rotate: [0, 360] }}
+                      transition={{ duration: 4, repeat: Infinity, delay: index * 0.4 }}
+                      className="absolute -bottom-3 -right-3 w-6 h-6 bg-gradient-to-br from-pink-300 to-rose-300 rounded-full shadow-lg"
+                    />
                   </motion.div>
                 ))}
               </div>
@@ -161,66 +295,121 @@ export default function CuteTemplate({ card }: CuteTemplateProps) {
           </div>
         )}
 
-        {/* SECTION 3: Handwritten Note Card */}
-        <div className="min-h-screen bg-pink-50 p-8 sm:p-12 md:p-16 flex items-center justify-center">
+        {/* SECTION 3: Garden Letter Message */}
+        <div className="min-h-screen bg-gradient-to-br from-sage-100 via-blush-50 to-amber-50 p-8 sm:p-12 md:p-16 flex items-center justify-center relative overflow-hidden">
+          {/* Layered garden background */}
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Floating flowers */}
+            {[...Array(10)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute"
+                style={{
+                  left: `${10 + i * 9}%`,
+                  top: `${15 + (i % 3) * 25}%`,
+                }}
+                animate={{
+                  y: [0, -18, 0],
+                  rotate: [0, 25, 0],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 6 + i * 0.5,
+                  repeat: Infinity,
+                  delay: i * 0.35,
+                }}
+              >
+                <Flower2 className={`w-12 h-12 ${i % 3 === 0 ? 'text-pink-300' : i % 3 === 1 ? 'text-purple-300' : 'text-amber-300'}`} />
+              </motion.div>
+            ))}
+            
+            {/* Fireflies */}
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  opacity: [0.2, 0.9, 0.2],
+                  scale: [1, 1.6, 1],
+                  y: [0, -30, 0],
+                }}
+                transition={{
+                  duration: 4 + Math.random() * 2,
+                  repeat: Infinity,
+                  delay: Math.random() * 2,
+                }}
+              >
+                <div className="w-3 h-3 bg-amber-400 rounded-full shadow-xl shadow-amber-400/70" />
+              </motion.div>
+            ))}
+          </div>
+
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, rotateX: 10 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="relative max-w-2xl"
+            transition={{ duration: 1.2 }}
+            className="relative max-w-2xl z-10"
+            style={{ perspective: '1000px' }}
           >
-            {/* Note paper */}
-            <div className="bg-white p-8 sm:p-12 md:p-16 shadow-2xl border-2 border-dashed border-pink-300">
-              {/* Tape */}
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-40 h-8 bg-yellow-400/80 rotate-1 shadow-md" />
+            {/* Storybook letter page */}
+            <div className="bg-gradient-to-br from-amber-50 to-sage-50 p-10 sm:p-14 md:p-20 shadow-2xl border-8 border-amber-200/50 rounded-3xl relative">
+              {/* Gold corner decorations */}
+              <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-xl">
+                <Sparkles className="w-6 h-6 text-white" />
+              </div>
+              <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-xl">
+                <Sparkles className="w-6 h-6 text-white" />
+              </div>
               
-              <div className="text-center space-y-6">
-                <p 
-                  className="text-3xl sm:text-4xl font-bold text-pink-600"
-                  style={{ fontFamily: 'var(--font-fredoka)' }}
+              <div className="text-center space-y-8 relative z-10">
+                <motion.p
+                  animate={{ scale: [1, 1.03, 1] }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                  className="text-3xl sm:text-4xl font-bold text-sage-700"
+                  style={{ fontFamily: 'serif' }}
                 >
-                  Dear {card.recipient_name},
-                </p>
+                  🌸 Dear {card.recipient_name} 🌸
+                </motion.p>
                 <p 
-                  className="text-xl sm:text-2xl text-gray-700 leading-relaxed"
-                  style={{ fontFamily: 'var(--font-baloo-2)', lineHeight: '1.8' }}
+                  className="text-xl sm:text-2xl text-sage-800 leading-relaxed"
+                  style={{ fontFamily: 'serif', lineHeight: '1.9' }}
                 >
                   {card.message}
                 </p>
                 {card.sender_name && (
-                  <p 
-                    className="text-2xl sm:text-3xl text-pink-500 font-bold"
-                    style={{ fontFamily: 'var(--font-fredoka)' }}
+                  <motion.p
+                    animate={{ rotate: [-2, 2, -2] }}
+                    transition={{ duration: 5, repeat: Infinity }}
+                    className="text-2xl sm:text-3xl text-sage-600 font-bold"
+                    style={{ fontFamily: 'serif' }}
                   >
-                    Love, {card.sender_name} 💕
-                  </p>
+                    With love, {card.sender_name} ✨
+                  </motion.p>
                 )}
               </div>
               
-              {/* Stickers */}
-              <motion.div
-                animate={{ rotate: [-5, 5, -5] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                className="absolute -bottom-6 -left-6"
-              >
-                <Star className="w-10 h-10 text-yellow-400 fill-current" />
-              </motion.div>
-              <motion.div
-                animate={{ rotate: [5, -5, 5] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                className="absolute -bottom-6 -right-6"
-              >
-                <Heart className="w-10 h-10 text-pink-400 fill-current" />
-              </motion.div>
+              {/* Floating petals */}
+              {[...Array(4)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  animate={{ y: [0, -10, 0], rotate: [0, 360] }}
+                  transition={{ duration: 5 + i, repeat: Infinity, delay: i * 0.5 }}
+                  className={`absolute ${i % 2 === 0 ? '-bottom-6 -left-6' : '-bottom-6 -right-6'} w-8 h-8 bg-gradient-to-br ${i % 2 === 0 ? 'from-pink-300 to-rose-300' : 'from-purple-300 to-pink-300'} rounded-full shadow-lg`}
+                />
+              ))}
             </div>
           </motion.div>
         </div>
 
-        {/* SECTION 4: Polaroid Gallery */}
+        {/* SECTION 4: Magical Garden Gallery */}
         {allPhotos.length > 1 && (
-          <div className="min-h-screen bg-white p-8 sm:p-12 md:p-16">
-            <div className="max-w-6xl mx-auto">
+          <div className="min-h-screen bg-gradient-to-br from-blush-50 via-sage-100 to-amber-50 p-8 sm:p-12 md:p-16">
+            <div className="max-w-6xl mx-auto relative">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -228,14 +417,14 @@ export default function CuteTemplate({ card }: CuteTemplateProps) {
                 transition={{ duration: 0.8 }}
                 className="mb-12"
               >
-                <p className="text-gray-400 text-xs tracking-widest uppercase mb-2">
-                  Gallery
+                <p className="text-sage-600 text-xs tracking-widest uppercase mb-2 font-bold" style={{ fontFamily: 'serif' }}>
+                  📸 Garden Gallery
                 </p>
                 <h2 
-                  className="text-3xl sm:text-4xl font-bold text-pink-600"
-                  style={{ fontFamily: 'var(--font-fredoka)' }}
+                  className="text-4xl sm:text-5xl font-bold text-sage-800"
+                  style={{ fontFamily: 'serif' }}
                 >
-                  Favorite Moments
+                  Enchanted Moments ✨
                 </h2>
               </motion.div>
 
@@ -243,14 +432,16 @@ export default function CuteTemplate({ card }: CuteTemplateProps) {
                 {allPhotos.slice(1, 4).map((photo, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, rotate: index % 2 === 0 ? -3 : 3 }}
-                    whileInView={{ opacity: 1, rotate: 0 }}
+                    initial={{ opacity: 0, rotateY: index % 2 === 0 ? -10 : 10, scale: 0.9 }}
+                    whileInView={{ opacity: 1, rotateY: 0, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.15 }}
+                    transition={{ duration: 0.7, delay: index * 0.15 }}
+                    whileHover={{ scale: 1.08, rotateY: 5 }}
                     className="relative"
+                    style={{ perspective: '1000px' }}
                   >
-                    <div className="bg-white p-4 pb-8 shadow-xl">
-                      <div className="aspect-[4/5] bg-gray-100 overflow-hidden">
+                    <div className="bg-gradient-to-br from-amber-50 to-sage-50 p-4 pb-8 shadow-2xl rounded-2xl border-4 border-amber-200/50">
+                      <div className="aspect-[4/5] bg-gray-100 overflow-hidden rounded-xl border-2 border-amber-100/50">
                         <Image
                           src={photo}
                           alt={`Gallery ${index + 1}`}
@@ -259,10 +450,28 @@ export default function CuteTemplate({ card }: CuteTemplateProps) {
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                       </div>
-                      <p className="text-center text-gray-500 text-sm mt-4">Memory {index + 1}</p>
+                      <p className="text-center text-sage-600 text-sm mt-4 font-bold" style={{ fontFamily: 'serif' }}>
+                        Memory {index + 1} 🌸
+                      </p>
                     </div>
-                    {/* Washi tape */}
-                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-20 h-6 bg-pink-400/60 rotate-2 shadow-sm" />
+                    
+                    {/* Gold decoration */}
+                    <motion.div
+                      animate={{ rotate: [0, 8, 0] }}
+                      transition={{ duration: 5, repeat: Infinity, delay: index * 0.5 }}
+                      className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-20 h-6 bg-gradient-to-r from-amber-400 to-amber-500/60 rotate-2 shadow-sm rounded-full flex items-center justify-center"
+                    >
+                      <Sparkles className="w-4 h-4 text-amber-700" />
+                    </motion.div>
+                    
+                    {/* Floating flower */}
+                    <motion.div
+                      animate={{ y: [0, -8, 0], rotate: [0, 20, 0] }}
+                      transition={{ duration: 4, repeat: Infinity, delay: index * 0.3 }}
+                      className="absolute -bottom-4 -right-4 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center border-4 border-amber-200"
+                    >
+                      <Flower2 className="w-5 h-5 text-pink-400" />
+                    </motion.div>
                   </motion.div>
                 ))}
               </div>
@@ -270,11 +479,12 @@ export default function CuteTemplate({ card }: CuteTemplateProps) {
           </div>
         )}
 
-        {/* SECTION 5: Sticker Collection Finale */}
-        <div className="min-h-screen bg-pink-50 p-8 sm:p-12 md:p-16 flex flex-col items-center justify-center relative overflow-hidden">
-          {/* Floating sticker elements */}
+        {/* SECTION 5: Whimsical Garden Finale */}
+        <div className="min-h-screen bg-gradient-to-br from-sage-100 via-blush-50 to-amber-50 p-8 sm:p-12 md:p-16 flex flex-col items-center justify-center relative overflow-hidden">
+          {/* Layered garden elements */}
           <div className="absolute inset-0 pointer-events-none">
-            {[...Array(12)].map((_, i) => (
+            {/* Floating flowers */}
+            {[...Array(20)].map((_, i) => (
               <motion.div
                 key={i}
                 className="absolute"
@@ -285,7 +495,33 @@ export default function CuteTemplate({ card }: CuteTemplateProps) {
                 animate={{
                   y: [0, -20, 0],
                   rotate: [0, 360],
-                  scale: [1, 1.1, 1],
+                  scale: [1, 1.25, 1],
+                }}
+                transition={{
+                  duration: 5 + Math.random() * 2,
+                  repeat: Infinity,
+                  delay: Math.random() * 2,
+                }}
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-amber-50 to-sage-50 rounded-full shadow-xl flex items-center justify-center border-4 border-amber-200/50">
+                  <Flower2 className={`w-8 h-8 ${i % 4 === 0 ? 'text-pink-300' : i % 4 === 1 ? 'text-purple-300' : i % 4 === 2 ? 'text-amber-300' : 'text-rose-300'}`} />
+                </div>
+              </motion.div>
+            ))}
+            
+            {/* Fireflies */}
+            {[...Array(30)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  opacity: [0.2, 1, 0.2],
+                  scale: [1, 1.5, 1],
+                  y: [0, -30, 0],
                 }}
                 transition={{
                   duration: 4 + Math.random() * 2,
@@ -293,11 +529,7 @@ export default function CuteTemplate({ card }: CuteTemplateProps) {
                   delay: Math.random() * 2,
                 }}
               >
-                <div className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center">
-                  <span className="text-2xl">
-                    {['⭐', '💕', '🌸', '🎀', '🦋', '🌈', '🎂', '🎁', '💖', '🌺', '✨', '🍭'][i]}
-                  </span>
-                </div>
+                <div className="w-3 h-3 bg-amber-400 rounded-full shadow-xl shadow-amber-400/80" />
               </motion.div>
             ))}
           </div>
@@ -309,21 +541,22 @@ export default function CuteTemplate({ card }: CuteTemplateProps) {
             transition={{ duration: 1 }}
             className="text-center space-y-12 max-w-4xl relative z-10"
           >
-            <p className="text-gray-400 text-xs tracking-widest uppercase">
-              Your Sticker Collection
+            <p className="text-sage-600 text-xs tracking-widest uppercase font-bold" style={{ fontFamily: 'serif' }}>
+              🎉 Whimsical Garden Celebration 🎉
             </p>
 
-            {/* Sticker grid */}
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
-              {['⭐', '💕', '🌸', '🎀', '🦋', '🌈', '🎂', '🎁', '💖', '🌺', '✨', '🍭'].map((emoji, index) => (
+            {/* Flower grid */}
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6">
+              {['🌸', '✨', '🦋', '�', '💕', '🌈', '⭐', '�', '💖', '�', '🌻', '�'].map((emoji, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, scale: 0, rotate: -180 }}
                   whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.2, rotate: 10 }}
-                  className="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full shadow-lg flex items-center justify-center cursor-pointer"
+                  whileHover={{ scale: 1.3, rotate: 15 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-amber-50 to-sage-50 rounded-full shadow-xl flex items-center justify-center cursor-pointer border-4 border-amber-200/50"
                 >
                   <span className="text-3xl sm:text-4xl">{emoji}</span>
                 </motion.div>
@@ -331,29 +564,29 @@ export default function CuteTemplate({ card }: CuteTemplateProps) {
             </div>
 
             {/* Action buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mt-8">
+            <div className="flex flex-col gap-4 justify-center mt-8">
               <motion.button
                 whileHover={{ scale: 1.05, rotate: 2 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleShare}
-                className="px-6 sm:px-8 py-4 bg-pink-500 text-white text-sm font-bold rounded-full shadow-lg hover:bg-pink-600 transition-colors min-h-[48px]"
-                style={{ fontFamily: 'var(--font-fredoka)' }}
+                className="px-12 py-6 bg-gradient-to-r from-sage-500 to-amber-500 text-white text-sm font-bold rounded-full shadow-xl hover:from-sage-600 hover:to-amber-600 transition-all min-h-[60px]"
+                style={{ fontFamily: 'serif' }}
               >
-                Share Collection 💕
+                Share Garden Magic ✨🌸
               </motion.button>
 
               <motion.button
                 whileHover={{ scale: 1.05, rotate: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-4 bg-white text-pink-500 text-sm font-bold rounded-full shadow-lg border-2 border-pink-300 hover:bg-pink-50 transition-colors min-h-[48px]"
-                style={{ fontFamily: 'var(--font-fredoka)' }}
+                className="px-12 py-6 bg-white text-sage-600 text-sm font-bold rounded-full shadow-xl border-4 border-amber-200 hover:bg-amber-50 transition-all min-h-[60px]"
+                style={{ fontFamily: 'serif' }}
               >
-                Save Stickers ⭐
+                Save Whimsical Memories ⭐🦋
               </motion.button>
             </div>
 
-            <p className="text-gray-400 text-xs mt-8">
-              Made with 💖 by Spectre
+            <p className="text-sage-600 text-xs mt-8" style={{ fontFamily: 'serif' }}>
+              Made with 💖 in a garden of dreams
             </p>
           </motion.div>
         </div>

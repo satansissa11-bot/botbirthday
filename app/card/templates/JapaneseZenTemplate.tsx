@@ -40,17 +40,19 @@ export default function JapaneseZenTemplate({ card }: JapaneseZenTemplateProps) 
   };
 
   return (
-    <div className="min-h-screen bg-stone-50">
-      {/* Subtle cherry blossom pattern */}
-      <div className="fixed inset-0 pointer-events-none opacity-5">
+    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-rose-50 to-stone-200">
+      {/* Premium washi paper texture */}
+      <div className="fixed inset-0 pointer-events-none opacity-8">
         <div className="absolute inset-0" style={{
           backgroundImage: `
-            radial-gradient(circle at 20% 30%, #f9a8d4 2px, transparent 2px),
-            radial-gradient(circle at 80% 70%, #f9a8d4 2px, transparent 2px),
-            radial-gradient(circle at 40% 80%, #f9a8d4 1px, transparent 1px),
-            radial-gradient(circle at 60% 20%, #f9a8d4 1px, transparent 1px)
+            radial-gradient(circle at 20% 30%, #f9a8d4 3px, transparent 3px),
+            radial-gradient(circle at 80% 70%, #f9a8d4 3px, transparent 3px),
+            radial-gradient(circle at 40% 80%, #f9a8d4 2px, transparent 2px),
+            radial-gradient(circle at 60% 20%, #f9a8d4 2px, transparent 2px),
+            linear-gradient(90deg, transparent 50%, rgba(180, 160, 140, 0.1) 50%),
+            linear-gradient(0deg, transparent 50%, rgba(180, 160, 140, 0.1) 50%)
           `,
-          backgroundSize: '200px 200px'
+          backgroundSize: '250px 250px, 250px 250px, 250px 250px, 250px 250px, 4px 4px, 4px 4px'
         }} />
       </div>
 
@@ -62,94 +64,227 @@ export default function JapaneseZenTemplate({ card }: JapaneseZenTemplateProps) 
 
       {/* Main content */}
       <div className="relative z-10">
-        {/* SECTION 1: Editorial Hero - Photo Top, Text Bottom */}
-        <div className="min-h-screen bg-stone-50">
-          {/* Top section - Photo */}
-          {allPhotos.length > 0 && (
-            <div className="h-[60vh] relative">
-              <Image
-                src={allPhotos[0]}
-                alt="Editorial photo"
-                fill
-                className="object-cover"
-                priority
-                sizes="100vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-stone-50 to-transparent" />
+        {/* SECTION 1: Premium Vertical Scroll with Elegant Cherry Blossom */}
+        <div className="min-h-screen relative overflow-hidden">
+          {/* Elegant cherry blossom branches on left */}
+          <div className="absolute left-0 top-0 h-full w-40 pointer-events-none">
+            {[...Array(10)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute"
+                style={{
+                  left: `${15 + Math.random() * 25}px`,
+                  top: `${i * 10 + Math.random() * 5}%`,
+                }}
+                animate={{
+                  x: [0, 8, 0],
+                  rotate: [0, 20, 0],
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  duration: 5 + i * 0.6,
+                  repeat: Infinity,
+                  delay: i * 0.4,
+                }}
+              >
+                <div className="w-24 h-1 bg-gradient-to-r from-rose-400 to-transparent rounded-full" />
+                <div className="absolute -top-1 left-1/2 w-3 h-3 bg-rose-400 rounded-full shadow-lg shadow-rose-400/30" />
+                <div className="absolute -top-2 left-10 w-2 h-2 bg-rose-300 rounded-full shadow-md" />
+                <div className="absolute -top-1 left-16 w-1.5 h-1.5 bg-rose-200 rounded-full" />
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Elegant cherry blossom branches on right */}
+          <div className="absolute right-0 top-0 h-full w-40 pointer-events-none">
+            {[...Array(10)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute"
+                style={{
+                  right: `${15 + Math.random() * 25}px`,
+                  top: `${i * 10 + Math.random() * 5}%`,
+                }}
+                animate={{
+                  x: [0, -8, 0],
+                  rotate: [0, -20, 0],
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  duration: 5 + i * 0.6,
+                  repeat: Infinity,
+                  delay: i * 0.4,
+                }}
+              >
+                <div className="w-24 h-1 bg-gradient-to-l from-rose-400 to-transparent rounded-full" />
+                <div className="absolute -top-1 right-1/2 w-3 h-3 bg-rose-400 rounded-full shadow-lg shadow-rose-400/30" />
+                <div className="absolute -top-2 right-10 w-2 h-2 bg-rose-300 rounded-full shadow-md" />
+                <div className="absolute -top-1 right-16 w-1.5 h-1.5 bg-rose-200 rounded-full" />
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Premium vertical scroll content */}
+          <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8 sm:p-16 md:p-24">
+            {/* Elegant falling cherry blossoms */}
+            <div className="absolute inset-0 pointer-events-none">
+              {[...Array(20)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute text-rose-300/50"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                  }}
+                  animate={{
+                    y: [0, -40, 0],
+                    rotate: [0, 360],
+                    opacity: [0.3, 0.6, 0.3],
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{
+                    duration: 10 + i * 0.6,
+                    repeat: Infinity,
+                    delay: i * 0.5,
+                  }}
+                >
+                  <div className="w-5 h-5 rounded-full shadow-lg shadow-rose-400/20" />
+                </motion.div>
+              ))}
             </div>
-          )}
-          
-          {/* Bottom section - Editorial text */}
-          <div className="h-[40vh] flex items-center justify-center p-8 sm:p-16 md:p-24 relative">
+
+            {/* Premium photo with vertical scroll effect */}
+            {allPhotos.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 60 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.5 }}
+                className="relative w-full max-w-lg mb-16"
+              >
+                <div className="relative aspect-[3/4] bg-white p-6 shadow-2xl border-4 border-rose-200/60">
+                  <Image
+                    src={allPhotos[0]}
+                    alt="Zen photo"
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="512px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-stone-900/30 to-transparent" />
+                  {/* Premium frame decoration */}
+                  <div className="absolute inset-4 border border-rose-300/40 pointer-events-none" />
+                </div>
+                
+                {/* Elegant vertical scroll indicator */}
+                <motion.div
+                  animate={{ y: [0, 12, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity }}
+                  className="absolute -right-10 top-1/2 -translate-y-1/2"
+                >
+                  <div className="w-1.5 h-20 bg-rose-400/60 rounded-full shadow-lg shadow-rose-400/30" />
+                  <div className="absolute top-3 left-1/2 -translate-x-1/2 w-3 h-3 bg-rose-500 rounded-full shadow-md" />
+                </motion.div>
+              </motion.div>
+            )}
+
+            {/* Premium text content */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2 }}
-              className="max-w-4xl"
+              transition={{ duration: 1.5, delay: 0.4 }}
+              className="text-center max-w-3xl"
             >
-              <div className="border-l-4 border-rose-300 pl-8">
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 1 }}
-                  className="text-rose-400 text-lg sm:text-xl md:text-2xl mb-6"
-                  style={{ fontFamily: 'serif' }}
-                >
-                  お誕生日おめでとう
-                </motion.p>
-                
-                <h1 
-                  className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-stone-800 font-light leading-none mb-6"
-                  style={{ fontFamily: 'serif' }}
-                >
-                  {card.recipient_name}
-                </h1>
-                
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.6, duration: 1 }}
-                  className="text-stone-500 text-base sm:text-lg md:text-xl"
-                  style={{ fontFamily: 'serif' }}
-                >
-                  Happy Birthday
-                </motion.p>
-              </div>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6, duration: 1.2 }}
+                className="text-rose-600 text-2xl sm:text-3xl md:text-4xl mb-10 font-bold tracking-wider"
+                style={{ fontFamily: 'serif' }}
+              >
+                ★ お誕生日おめでとう ★
+              </motion.p>
+              
+              <motion.h1
+                animate={{ scale: [1, 1.03, 1] }}
+                transition={{ duration: 6, repeat: Infinity }}
+                className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-stone-800 font-light leading-none mb-10"
+                style={{ fontFamily: 'serif', letterSpacing: '-0.02em' }}
+              >
+                {card.recipient_name}
+              </motion.h1>
+              
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1, duration: 1.2 }}
+                className="text-stone-600 text-xl sm:text-2xl md:text-3xl font-bold tracking-wide"
+                style={{ fontFamily: 'serif' }}
+              >
+                Happy Birthday
+              </motion.p>
             </motion.div>
           </div>
         </div>
 
-        {/* SECTION 2: Minimal Photo Display */}
+        {/* SECTION 2: Premium Minimal Photo Display */}
         {allPhotos.length > 0 && (
-          <div className="min-h-screen bg-white p-8 sm:p-16 md:p-24">
-            <div className="max-w-5xl mx-auto">
+          <div className="min-h-screen bg-white p-8 sm:p-16 md:p-24 relative overflow-hidden">
+            {/* Elegant floating cherry blossoms */}
+            <div className="absolute inset-0 pointer-events-none">
+              {[...Array(8)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute text-rose-300/40"
+                  style={{
+                    left: `${10 + i * 12}%`,
+                    top: `${Math.random() * 100}%`,
+                  }}
+                  animate={{
+                    y: [0, -18, 0],
+                    rotate: [0, 180],
+                    opacity: [0.3, 0.6, 0.3],
+                    scale: [1, 1.15, 1],
+                  }}
+                  transition={{
+                    duration: 6 + i,
+                    repeat: Infinity,
+                    delay: i * 0.6,
+                  }}
+                >
+                  <div className="w-3 h-3 rounded-full shadow-lg shadow-rose-400/20" />
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="max-w-6xl mx-auto relative z-10">
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 1 }}
-                className="mb-16"
+                transition={{ duration: 1.2 }}
+                className="mb-20"
               >
-                <p className="text-stone-400 text-xs tracking-widest uppercase mb-4">
-                  Memories
+                <p className="text-stone-400 text-sm tracking-[0.4em] uppercase mb-6 font-bold" style={{ fontFamily: 'serif' }}>
+                  ★ MEMORIES ★
                 </p>
                 <h2 
-                  className="text-3xl sm:text-4xl md:text-5xl text-stone-800 font-light"
-                  style={{ fontFamily: 'serif' }}
+                  className="text-5xl sm:text-6xl md:text-7xl text-stone-800 font-light font-bold"
+                  style={{ fontFamily: 'serif', letterSpacing: '-0.02em' }}
                 >
                   思い出
                 </h2>
               </motion.div>
 
-              {/* Single large photo with minimal frame */}
+              {/* Premium single large photo with elegant frame */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 1.2 }}
+                transition={{ duration: 1.5 }}
+                whileHover={{ scale: 1.02 }}
                 className="relative"
               >
-                <div className="aspect-[16/9] bg-stone-100 relative overflow-hidden">
+                <div className="aspect-[16/9] bg-stone-100 relative overflow-hidden shadow-2xl">
                   <Image
                     src={allPhotos[0]}
                     alt="Memory"
@@ -158,81 +293,137 @@ export default function JapaneseZenTemplate({ card }: JapaneseZenTemplateProps) 
                     sizes="100vw"
                   />
                 </div>
-                {/* Minimal frame */}
-                <div className="absolute inset-4 border border-stone-200 pointer-events-none" />
+                {/* Premium elegant frame */}
+                <div className="absolute inset-8 border-2 border-rose-300/50 pointer-events-none" />
+                <div className="absolute inset-12 border border-rose-200/30 pointer-events-none" />
               </motion.div>
             </div>
           </div>
         )}
 
-        {/* SECTION 3: Haiku-style Message */}
-        <div className="min-h-screen bg-stone-50 p-8 sm:p-16 md:p-24 flex items-center justify-center">
+        {/* SECTION 3: Premium Haiku-style Message */}
+        <div className="min-h-screen bg-gradient-to-br from-stone-50 to-rose-50 p-8 sm:p-16 md:p-24 flex items-center justify-center relative overflow-hidden">
+          {/* Elegant floating cherry blossoms */}
+          <div className="absolute inset-0 pointer-events-none">
+            {[...Array(10)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute text-rose-300/45"
+                style={{
+                  left: `${8 + i * 10}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  y: [0, -25, 0],
+                  rotate: [0, 360],
+                  opacity: [0.35, 0.65, 0.35],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 7 + i,
+                  repeat: Infinity,
+                  delay: i * 0.6,
+                }}
+              >
+                <div className="w-4 h-4 rounded-full shadow-lg shadow-rose-400/25" />
+              </motion.div>
+            ))}
+          </div>
+
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.2 }}
-            className="max-w-3xl text-center"
+            transition={{ duration: 1.5 }}
+            className="max-w-4xl text-center relative z-10"
           >
-            {/* Decorative line */}
-            <div className="w-16 h-px bg-rose-300 mx-auto mb-12" />
+            {/* Elegant decorative line */}
+            <div className="w-32 h-px bg-rose-400 mx-auto mb-16" />
             
-            <p className="text-stone-400 text-xs tracking-widest uppercase mb-8">
-              Message
+            <p className="text-stone-400 text-sm tracking-[0.4em] uppercase mb-12 font-bold" style={{ fontFamily: 'serif' }}>
+              ★ MESSAGE ★
             </p>
             
             <p 
-              className="text-2xl sm:text-3xl md:text-4xl text-stone-700 leading-relaxed font-light"
-              style={{ fontFamily: 'serif', lineHeight: '2' }}
+              className="text-3xl sm:text-4xl md:text-5xl text-stone-700 leading-relaxed font-light"
+              style={{ fontFamily: 'serif', lineHeight: '2.4', letterSpacing: '0.01em' }}
             >
               {card.message}
             </p>
             
             {card.sender_name && (
-              <p className="text-stone-500 text-lg mt-12" style={{ fontFamily: 'serif' }}>
+              <p className="text-stone-500 text-2xl mt-16 font-bold" style={{ fontFamily: 'serif' }}>
                 — {card.sender_name}
               </p>
             )}
             
-            {/* Decorative line */}
-            <div className="w-16 h-px bg-rose-300 mx-auto mt-12" />
+            {/* Elegant decorative line */}
+            <div className="w-32 h-px bg-rose-400 mx-auto mt-16" />
           </motion.div>
         </div>
 
-        {/* SECTION 4: Photo Grid - Asymmetric */}
+        {/* SECTION 4: Premium Photo Grid */}
         {allPhotos.length > 1 && (
-          <div className="min-h-screen bg-white p-8 sm:p-16 md:p-24">
-            <div className="max-w-6xl mx-auto">
+          <div className="min-h-screen bg-white p-8 sm:p-16 md:p-24 relative overflow-hidden">
+            {/* Elegant floating cherry blossoms */}
+            <div className="absolute inset-0 pointer-events-none">
+              {[...Array(8)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute text-rose-300/40"
+                  style={{
+                    left: `${10 + i * 12}%`,
+                    top: `${Math.random() * 100}%`,
+                  }}
+                  animate={{
+                    y: [0, -20, 0],
+                    rotate: [0, 200],
+                    opacity: [0.3, 0.6, 0.3],
+                    scale: [1, 1.15, 1],
+                  }}
+                  transition={{
+                    duration: 6 + i,
+                    repeat: Infinity,
+                    delay: i * 0.6,
+                  }}
+                >
+                  <div className="w-3 h-3 rounded-full shadow-lg shadow-rose-400/20" />
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="max-w-7xl mx-auto relative z-10">
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 1 }}
-                className="mb-16"
+                transition={{ duration: 1.2 }}
+                className="mb-20"
               >
-                <p className="text-stone-400 text-xs tracking-widest uppercase mb-4">
-                  Gallery
+                <p className="text-stone-400 text-sm tracking-[0.4em] uppercase mb-6 font-bold" style={{ fontFamily: 'serif' }}>
+                  ★ GALLERY ★
                 </p>
                 <h2 
-                  className="text-3xl sm:text-4xl md:text-5xl text-stone-800 font-light"
-                  style={{ fontFamily: 'serif' }}
+                  className="text-5xl sm:text-6xl md:text-7xl text-stone-800 font-light font-bold"
+                  style={{ fontFamily: 'serif', letterSpacing: '-0.02em' }}
                 >
                   写真
                 </h2>
               </motion.div>
 
-              {/* Asymmetric grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Premium asymmetric grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                 {allPhotos.slice(1, 4).map((photo, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 40, scale: 0.9 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: index * 0.2 }}
+                    transition={{ duration: 1, delay: index * 0.25 }}
+                    whileHover={{ scale: 1.03 }}
                     className={`relative ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''}`}
                   >
-                    <div className={`${index === 0 ? 'aspect-[16/9]' : 'aspect-square'} bg-stone-100 relative overflow-hidden`}>
+                    <div className={`${index === 0 ? 'aspect-[16/9]' : 'aspect-square'} bg-stone-100 relative overflow-hidden shadow-2xl`}>
                       <Image
                         src={photo}
                         alt={`Photo ${index + 1}`}
@@ -241,6 +432,9 @@ export default function JapaneseZenTemplate({ card }: JapaneseZenTemplateProps) 
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     </div>
+                    {/* Premium frame */}
+                    <div className="absolute inset-6 border border-rose-300/50 pointer-events-none" />
+                    <div className="absolute inset-10 border border-rose-200/30 pointer-events-none" />
                   </motion.div>
                 ))}
               </div>
@@ -248,40 +442,47 @@ export default function JapaneseZenTemplate({ card }: JapaneseZenTemplateProps) 
           </div>
         )}
 
-        {/* SECTION 5: Zen Garden Finale */}
-        <div className="min-h-screen bg-stone-50 flex items-center justify-center p-8 sm:p-16 md:p-24 relative overflow-hidden">
-          {/* Zen garden elements */}
+        {/* SECTION 5: Premium Zen Garden Finale */}
+        <div className="min-h-screen bg-gradient-to-br from-stone-100 to-rose-100 flex items-center justify-center p-8 sm:p-16 md:p-24 relative overflow-hidden">
+          {/* Premium Zen garden elements */}
           <div className="absolute inset-0 pointer-events-none">
-            {/* Raked sand patterns */}
-            <div className="absolute inset-0 opacity-20">
+            {/* Enhanced raked sand patterns */}
+            <div className="absolute inset-0 opacity-30">
+              <div className="absolute top-1/6 left-0 right-0 h-px bg-stone-400" />
+              <div className="absolute top-1/5 left-0 right-0 h-px bg-stone-400" />
               <div className="absolute top-1/4 left-0 right-0 h-px bg-stone-400" />
               <div className="absolute top-1/3 left-0 right-0 h-px bg-stone-400" />
+              <div className="absolute top-2/5 left-0 right-0 h-px bg-stone-400" />
               <div className="absolute top-1/2 left-0 right-0 h-px bg-stone-400" />
+              <div className="absolute top-3/5 left-0 right-0 h-px bg-stone-400" />
               <div className="absolute top-2/3 left-0 right-0 h-px bg-stone-400" />
               <div className="absolute top-3/4 left-0 right-0 h-px bg-stone-400" />
+              <div className="absolute top-4/5 left-0 right-0 h-px bg-stone-400" />
+              <div className="absolute top-5/6 left-0 right-0 h-px bg-stone-400" />
             </div>
             
-            {/* Floating cherry blossoms */}
-            {[...Array(8)].map((_, i) => (
+            {/* Premium floating cherry blossoms */}
+            {[...Array(15)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute text-rose-300/30"
+                className="absolute text-rose-300/50"
                 style={{
-                  left: `${10 + i * 12}%`,
+                  left: `${5 + i * 7}%`,
                   top: `${Math.random() * 100}%`,
                 }}
                 animate={{
-                  y: [0, -20, 0],
+                  y: [0, -35, 0],
                   rotate: [0, 360],
-                  opacity: [0.3, 0.6, 0.3],
+                  opacity: [0.35, 0.7, 0.35],
+                  scale: [1, 1.25, 1],
                 }}
                 transition={{
-                  duration: 5 + i,
+                  duration: 7 + i,
                   repeat: Infinity,
-                  delay: i * 0.5,
+                  delay: i * 0.6,
                 }}
               >
-                <div className="w-4 h-4 rounded-full" />
+                <div className="w-5 h-5 rounded-full shadow-lg shadow-rose-400/25" />
               </motion.div>
             ))}
           </div>
@@ -290,76 +491,106 @@ export default function JapaneseZenTemplate({ card }: JapaneseZenTemplateProps) 
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.5 }}
-            className="text-center max-w-4xl relative z-10"
+            transition={{ duration: 1.8 }}
+            className="text-center max-w-5xl relative z-10"
           >
-            {/* Stone lantern */}
+            {/* Premium stone lantern */}
             <motion.div
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="mb-12"
+              animate={{ scale: [1, 1.1, 1], rotate: [0, 8, -8, 0] }}
+              transition={{ duration: 6, repeat: Infinity }}
+              className="mb-16"
             >
-              <div className="w-16 h-24 bg-stone-400 mx-auto rounded-t-full" />
-              <div className="w-24 h-8 bg-stone-500 mx-auto -mt-2" />
+              <div className="w-24 h-32 bg-gradient-to-b from-stone-400 to-stone-500 mx-auto rounded-t-full shadow-2xl" />
+              <div className="w-32 h-12 bg-gradient-to-b from-stone-500 to-stone-600 mx-auto -mt-3 shadow-2xl" />
+              <div className="w-20 h-8 bg-stone-600 mx-auto -mt-2 shadow-xl" />
             </motion.div>
             
-            <h2 
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-stone-800 font-light leading-none mb-8"
-              style={{ fontFamily: 'serif' }}
+            <motion.h2
+              animate={{ scale: [1, 1.03, 1] }}
+              transition={{ duration: 6, repeat: Infinity }}
+              className="text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] text-stone-800 font-light leading-none mb-12 font-bold"
+              style={{ fontFamily: 'serif', letterSpacing: '-0.03em' }}
             >
               お誕生日
-            </h2>
-            <p className="text-stone-500 text-xl sm:text-2xl md:text-3xl" style={{ fontFamily: 'serif' }}>
+            </motion.h2>
+            <p className="text-stone-600 text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide" style={{ fontFamily: 'serif' }}>
               {card.recipient_name}
             </p>
           </motion.div>
         </div>
 
-        {/* SECTION 6: Tea Ceremony Actions */}
-        <div className="min-h-screen bg-white p-8 sm:p-16 md:p-24 flex flex-col items-center justify-center">
+        {/* SECTION 6: Premium Tea Ceremony Actions */}
+        <div className="min-h-screen bg-white p-8 sm:p-16 md:p-24 flex flex-col items-center justify-center relative overflow-hidden">
+          {/* Elegant floating cherry blossoms */}
+          <div className="absolute inset-0 pointer-events-none">
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute text-rose-300/40"
+                style={{
+                  left: `${10 + i * 12}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  y: [0, -22, 0],
+                  rotate: [0, 220],
+                  opacity: [0.3, 0.6, 0.3],
+                  scale: [1, 1.15, 1],
+                }}
+                transition={{
+                  duration: 6 + i,
+                  repeat: Infinity,
+                  delay: i * 0.6,
+                }}
+              >
+                <div className="w-3 h-3 rounded-full shadow-lg shadow-rose-400/20" />
+              </motion.div>
+            ))}
+          </div>
+
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="text-center space-y-12 max-w-2xl"
+            transition={{ duration: 1.2 }}
+            className="text-center space-y-20 max-w-3xl relative z-10"
           >
-            {/* Tea cup icon */}
+            {/* Premium tea cup icon */}
             <motion.div
-              animate={{ rotate: [-5, 5, -5] }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="mb-8"
+              animate={{ rotate: [-10, 10, -10] }}
+              transition={{ duration: 5, repeat: Infinity }}
+              className="mb-12"
             >
-              <div className="w-12 h-12 border-2 border-stone-400 rounded-full mx-auto" />
+              <div className="w-20 h-20 border-4 border-stone-500 rounded-full mx-auto shadow-2xl" />
             </motion.div>
             
-            <p className="text-stone-400 text-xs tracking-widest uppercase">
-              Share
+            <p className="text-stone-400 text-sm tracking-[0.4em] uppercase font-bold" style={{ fontFamily: 'serif' }}>
+              ★ SHARE ★
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
+            <div className="flex flex-col sm:flex-row gap-8 sm:gap-12 justify-center">
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleShare}
-                className="px-6 sm:px-8 py-4 bg-stone-800 text-white text-sm font-light rounded hover:bg-stone-700 transition-colors min-h-[48px]"
+                className="px-12 py-6 bg-stone-800 text-white text-xl font-light rounded-lg hover:bg-stone-700 transition-all min-h-[64px] shadow-2xl"
                 style={{ fontFamily: 'serif' }}
               >
-                Share
+                SHARE
               </motion.button>
               
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-4 border border-stone-300 text-stone-800 text-sm font-light rounded hover:bg-stone-50 transition-colors min-h-[48px]"
+                className="px-12 py-6 border-4 border-stone-400 text-stone-800 text-xl font-light rounded-lg hover:bg-stone-50 transition-all min-h-[64px] shadow-2xl"
                 style={{ fontFamily: 'serif' }}
               >
-                Save
+                SAVE
               </motion.button>
             </div>
 
-            <p className="text-stone-400 text-xs mt-16">
-              Spectre
+            <p className="text-stone-400 text-sm mt-20 font-bold tracking-wider" style={{ fontFamily: 'serif' }}>
+              SPECTRE
             </p>
           </motion.div>
         </div>
