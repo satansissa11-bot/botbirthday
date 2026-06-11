@@ -26,7 +26,25 @@ export default function AllCards() {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setCards(data || []);
+      
+      // Handle photos array - might be returned as JSON string from PostgreSQL
+      const processedCards = (data || []).map(card => {
+        let processedPhotos = card.photos;
+        if (typeof card.photos === 'string') {
+          try {
+            processedPhotos = JSON.parse(card.photos);
+          } catch (e) {
+            console.error('Failed to parse photos JSON:', e);
+            processedPhotos = [];
+          }
+        }
+        return {
+          ...card,
+          photos: processedPhotos
+        };
+      });
+      
+      setCards(processedCards);
     } catch (error) {
       console.error('Error fetching cards:', error);
     } finally {

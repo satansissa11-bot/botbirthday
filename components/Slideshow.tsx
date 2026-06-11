@@ -18,6 +18,14 @@ export default function Slideshow({ photos, autoPlay = true, interval = 3000, ke
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
+  // Debug logging
+  console.log('=== SLIDESHOW DEBUG ===');
+  console.log('photos prop:', photos);
+  console.log('typeof photos:', typeof photos);
+  console.log('Array.isArray(photos):', Array.isArray(photos));
+  console.log('coverPhoto:', coverPhoto);
+  console.log('=======================');
+
   // Reorder photos to put cover photo first
   const orderedPhotos = coverPhoto && photos.includes(coverPhoto)
     ? [coverPhoto, ...photos.filter(p => p !== coverPhoto)]

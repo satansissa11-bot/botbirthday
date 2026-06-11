@@ -51,7 +51,36 @@ export default function CardPage() {
         .single();
 
       if (error) throw error;
-      setCard(data);
+      
+      // Handle photos array - might be returned as JSON string from PostgreSQL
+      let processedPhotos = data.photos;
+      if (typeof data.photos === 'string') {
+        try {
+          processedPhotos = JSON.parse(data.photos);
+          console.log('Parsed photos from JSON string:', processedPhotos);
+        } catch (e) {
+          console.error('Failed to parse photos JSON:', e);
+          processedPhotos = [];
+        }
+      }
+      
+      const cardWithProcessedPhotos = {
+        ...data,
+        photos: processedPhotos
+      };
+      
+      setCard(cardWithProcessedPhotos);
+      
+      // Debug logging for photos
+      console.log('=== PHOTO DEBUG ===');
+      console.log('card.photos:', cardWithProcessedPhotos.photos);
+      console.log('typeof card.photos:', typeof cardWithProcessedPhotos.photos);
+      console.log('Array.isArray(card.photos):', Array.isArray(cardWithProcessedPhotos.photos));
+      if (cardWithProcessedPhotos.photos) {
+        console.log('card.photos[0]:', cardWithProcessedPhotos.photos[0]);
+        console.log('card.photos.length:', cardWithProcessedPhotos.photos.length);
+      }
+      console.log('==================');
     } catch (error) {
       console.error('Error fetching card:', error);
     } finally {

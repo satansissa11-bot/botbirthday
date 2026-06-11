@@ -41,13 +41,24 @@ export default function EditCard() {
 
       if (error) throw error;
 
+      // Handle photos array - might be returned as JSON string from PostgreSQL
+      let processedPhotos = data.photos;
+      if (typeof data.photos === 'string') {
+        try {
+          processedPhotos = JSON.parse(data.photos);
+        } catch (e) {
+          console.error('Failed to parse photos JSON:', e);
+          processedPhotos = [];
+        }
+      }
+
       setCard(data);
       setFormData({
         recipient_name: data.recipient_name,
         sender_name: data.sender_name || '',
         message: data.message,
         template: data.template,
-        photos: data.photos,
+        photos: processedPhotos,
         cover_photo: data.cover_photo || '',
         music_url: data.music_url || '',
       });
