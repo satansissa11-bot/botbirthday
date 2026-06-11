@@ -41,9 +41,11 @@ CREATE TABLE IF NOT EXISTS birthday_cards (
   id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
   slug TEXT UNIQUE NOT NULL,
   recipient_name TEXT NOT NULL,
+  sender_name TEXT,
   message TEXT NOT NULL,
   template TEXT NOT NULL DEFAULT 'romantic',
   photos TEXT[] NOT NULL DEFAULT '{}',
+  cover_photo TEXT,
   music_url TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
