@@ -278,7 +278,7 @@ export default function ElegantTemplate({ card }: ElegantTemplateProps) {
                                 alt={`Portrait ${index + 1}`}
                                 fill
                                 className="object-cover sepia-[0.3]"
-                                sizes="192px"
+                                sizes="192px" unoptimized
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-amber-900/20 via-transparent to-amber-900/10" />
                             </div>
@@ -418,7 +418,7 @@ export default function ElegantTemplate({ card }: ElegantTemplateProps) {
                               alt={`Ballroom ${index + 1}`}
                               fill
                               className="object-cover sepia-[0.2]"
-                              sizes="224px"
+                              sizes="224px" unoptimized
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-amber-900/30 to-transparent rounded-full" />
                           </div>

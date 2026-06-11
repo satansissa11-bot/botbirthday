@@ -168,7 +168,7 @@ export default function JapaneseZenTemplate({ card }: JapaneseZenTemplateProps) 
                     fill
                     className="object-cover"
                     priority
-                    sizes="512px"
+                    sizes="512px" unoptimized
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-stone-900/30 to-transparent" />
                   {/* Premium frame decoration */}
@@ -290,7 +290,7 @@ export default function JapaneseZenTemplate({ card }: JapaneseZenTemplateProps) 
                     alt="Memory"
                     fill
                     className="object-cover"
-                    sizes="100vw"
+                    sizes="100vw" unoptimized
                   />
                 </div>
                 {/* Premium elegant frame */}
@@ -429,7 +429,7 @@ export default function JapaneseZenTemplate({ card }: JapaneseZenTemplateProps) 
                         alt={`Photo ${index + 1}`}
                         fill
                         className="object-cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" unoptimized
                       />
                     </div>
                     {/* Premium frame */}

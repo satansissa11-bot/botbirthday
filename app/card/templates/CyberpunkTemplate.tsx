@@ -234,7 +234,7 @@ export default function CyberpunkTemplate({ card }: CyberpunkTemplateProps) {
                           alt={`Record ${index + 1}`}
                           fill
                           className="object-cover"
-                          sizes="(max-width: 768px) 100vw, 33vw"
+                          sizes="(max-width: 768px) 100vw, 33vw" unoptimized
                         />
                         {/* Holographic scanlines */}
                         <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/30 to-transparent" />
@@ -466,7 +466,7 @@ export default function CyberpunkTemplate({ card }: CyberpunkTemplateProps) {
                           alt={`Urban ${index + 1}`}
                           fill
                           className="object-cover transition-transform duration-700 group-hover:scale-110"
-                          sizes="(max-width: 768px) 100vw, 50vw"
+                          sizes="(max-width: 768px) 100vw, 50vw" unoptimized
                         />
                         {/* Neon overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/40 via-transparent to-magenta-500/40" />

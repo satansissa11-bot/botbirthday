@@ -220,7 +220,7 @@ export default function LuxuryBlackGoldTemplate({ card }: LuxuryBlackGoldTemplat
                               alt={`Diamond ${index + 1}`}
                               fill
                               className="object-cover"
-                              sizes="256px"
+                              sizes="256px" unoptimized
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-amber-900/40 to-transparent" />
                           </div>
@@ -300,7 +300,7 @@ export default function LuxuryBlackGoldTemplate({ card }: LuxuryBlackGoldTemplat
                         alt={`VIP ${index + 1}`}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
-                        sizes="(max-width: 768px) 100vw, 50vw"
+                        sizes="(max-width: 768px) 100vw, 50vw" unoptimized
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                       

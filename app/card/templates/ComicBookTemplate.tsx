@@ -138,7 +138,7 @@ export default function ComicBookTemplate({ card }: ComicBookTemplateProps) {
                     alt="Cover"
                     fill
                     className="object-cover"
-                    sizes="100vw"
+                    sizes="100vw" unoptimized
                   />
                   {/* Comic overlay effect */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
@@ -318,7 +318,7 @@ export default function ComicBookTemplate({ card }: ComicBookTemplateProps) {
                         alt={`Panel ${index + 1}`}
                         fill
                         className="object-cover"
-                        sizes="50vw"
+                        sizes="50vw" unoptimized
                       />
                     </motion.div>
                   ))}

@@ -145,7 +145,7 @@ export default function GothicTemplate({ card }: GothicTemplateProps) {
                     fill
                     className="object-cover"
                     priority
-                    sizes="100vw"
+                    sizes="100vw" unoptimized
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-purple-900/80 via-purple-950/70 to-black/90" />
                 </div>
@@ -247,7 +247,7 @@ export default function GothicTemplate({ card }: GothicTemplateProps) {
                             alt={`Portrait ${index + 1}`}
                             fill
                             className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 400px"
+                            sizes="(max-width: 768px) 100vw, 400px" unoptimized
                           />
                           {/* Enhanced purple vignette */}
                           <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 via-transparent to-purple-900/50" />
@@ -422,7 +422,7 @@ export default function GothicTemplate({ card }: GothicTemplateProps) {
                           alt={`Memory ${index + 1}`}
                           fill
                           className="object-cover"
-                          sizes="320px"
+                          sizes="320px" unoptimized
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-purple-900/60 to-transparent" />
                       </div>

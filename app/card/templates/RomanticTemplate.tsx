@@ -297,6 +297,7 @@ export default function RomanticTemplate({ card }: RomanticTemplateProps) {
                           fill
                           className="object-cover"
                           sizes="(max-width: 768px) 50vw, 33vw"
+                          unoptimized
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-burgundy-900/20 to-transparent" />
                       </div>

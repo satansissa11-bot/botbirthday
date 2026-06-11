@@ -251,7 +251,7 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
                         alt={`Feature ${index + 1}`}
                         fill
                         className="object-cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" unoptimized
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                       
@@ -401,7 +401,7 @@ export default function ModernTemplate({ card }: ModernTemplateProps) {
                   alt="Featured"
                   fill
                   className="object-cover"
-                  sizes="50vw"
+                  sizes="50vw" unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 

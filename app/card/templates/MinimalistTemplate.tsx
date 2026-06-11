@@ -133,7 +133,7 @@ export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
                   fill
                   className="object-cover"
                   priority
-                  sizes="65vw"
+                  sizes="65vw" unoptimized
                 />
               </motion.div>
 
@@ -278,7 +278,7 @@ export default function MinimalistTemplate({ card }: MinimalistTemplateProps) {
                     alt="Portrait"
                     fill
                     className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 80vw"
+                    sizes="(max-width: 768px) 100vw, 80vw" unoptimized
                   />
                 </div>
               </div>

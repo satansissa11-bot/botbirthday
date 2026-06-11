@@ -90,6 +90,7 @@ export default function Slideshow({ photos, autoPlay = true, interval = 3000, ke
             fill
             className="object-cover"
             sizes="100vw"
+            unoptimized
           />
         )}
       </div>
@@ -121,6 +122,7 @@ export default function Slideshow({ photos, autoPlay = true, interval = 3000, ke
               kenBurns && 'ken-burns'
             )}
             sizes="100vw"
+            unoptimized
             style={kenBurns ? {
               animation: `kenBurns ${interval * 2}ms ease-in-out infinite alternate`,
             } : {}}
@@ -187,6 +189,7 @@ function KenBurnsImage({ src, alt, duration = 10, scale = 1.1 }: { src: string; 
         fill
         className="object-cover"
         sizes="100vw"
+        unoptimized
       />
     </motion.div>
   );

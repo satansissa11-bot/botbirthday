@@ -127,7 +127,7 @@ export default function CuteTemplate({ card }: CuteTemplateProps) {
                     fill
                     className="object-cover"
                     priority
-                    sizes="320px"
+                    sizes="320px" unoptimized
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-amber-900/20 to-transparent" />
                 </div>
@@ -271,7 +271,7 @@ export default function CuteTemplate({ card }: CuteTemplateProps) {
                           alt={`Memory ${index + 1}`}
                           fill
                           className="object-cover"
-                          sizes="(max-width: 768px) 50vw, 33vw"
+                          sizes="(max-width: 768px) 50vw, 33vw" unoptimized
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-amber-900/15 to-transparent" />
                       </div>
@@ -447,7 +447,7 @@ export default function CuteTemplate({ card }: CuteTemplateProps) {
                           alt={`Gallery ${index + 1}`}
                           fill
                           className="object-cover"
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" unoptimized
                         />
                       </div>
                       <p className="text-center text-sage-600 text-sm mt-4 font-bold" style={{ fontFamily: 'serif' }}>

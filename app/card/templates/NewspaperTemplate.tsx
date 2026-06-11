@@ -189,7 +189,7 @@ export default function NewspaperTemplate({ card }: NewspaperTemplateProps) {
                     alt="Lead photo"
                     fill
                     className="object-cover grayscale"
-                    sizes="100vw"
+                    sizes="100vw" unoptimized
                   />
                   {/* Dramatic photo caption */}
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-stone-900 via-stone-900/95 to-transparent text-stone-100 p-6 border-t-4 border-stone-700">
@@ -282,7 +282,7 @@ export default function NewspaperTemplate({ card }: NewspaperTemplateProps) {
                         alt={`Photo ${index + 1}`}
                         fill
                         className="object-cover grayscale"
-                        sizes="(max-width: 768px) 50vw, 33vw"
+                        sizes="(max-width: 768px) 50vw, 33vw" unoptimized
                       />
                     </div>
                     <p className="text-xs text-stone-500 mt-4 font-bold tracking-wider" style={{ fontFamily: 'serif' }}>

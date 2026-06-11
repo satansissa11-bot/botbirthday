@@ -88,7 +88,7 @@ export default function DarkLuxuryTemplate({ card }: DarkLuxuryTemplateProps) {
               fill
               className="object-cover"
               priority
-              sizes="100vw"
+              sizes="100vw" unoptimized
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
             
@@ -161,7 +161,7 @@ export default function DarkLuxuryTemplate({ card }: DarkLuxuryTemplateProps) {
                 alt="Featured photo"
                 fill
                 className="object-cover"
-                sizes="100vw"
+                sizes="100vw" unoptimized
               />
               {/* Dark overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/70" />
@@ -282,7 +282,7 @@ export default function DarkLuxuryTemplate({ card }: DarkLuxuryTemplateProps) {
                         alt={`Campaign ${index + 1}`}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        sizes="100vw"
+                        sizes="100vw" unoptimized
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                       

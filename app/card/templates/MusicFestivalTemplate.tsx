@@ -349,7 +349,7 @@ export default function MusicFestivalTemplate({ card }: MusicFestivalTemplatePro
                         alt={`Live ${index + 1}`}
                         fill
                         className="object-cover"
-                        sizes="(max-width: 640px) 100vw, 33vw"
+                        sizes="(max-width: 640px) 100vw, 33vw" unoptimized
                       />
                       {/* Enhanced neon overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-pink-600/50 to-transparent group-hover:from-orange-600/50 transition-colors" />
@@ -414,7 +414,7 @@ export default function MusicFestivalTemplate({ card }: MusicFestivalTemplatePro
                   alt="Stage backdrop"
                   fill
                   className="object-cover blur-sm opacity-30"
-                  sizes="100vw"
+                  sizes="100vw" unoptimized
                 />
               </div>
             )}

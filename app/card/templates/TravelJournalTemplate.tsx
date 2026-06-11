@@ -71,7 +71,7 @@ export default function TravelJournalTemplate({ card }: TravelJournalTemplatePro
                 fill
                 className="object-cover"
                 priority
-                sizes="100vw"
+                sizes="100vw" unoptimized
               />
               <div className="absolute inset-0 bg-gradient-to-br from-amber-900/70 via-orange-800/60 to-amber-900/80" />
             </div>
@@ -299,7 +299,7 @@ export default function TravelJournalTemplate({ card }: TravelJournalTemplatePro
                             alt={`Discovery ${index + 1}`}
                             fill
                             className="object-cover"
-                            sizes="224px"
+                            sizes="224px" unoptimized
                           />
                           {/* Map overlay */}
                           <div className="absolute inset-0 bg-gradient-to-t from-amber-900/50 to-transparent" />
@@ -454,7 +454,7 @@ export default function TravelJournalTemplate({ card }: TravelJournalTemplatePro
                           alt={`Milestone ${index + 1}`}
                           fill
                           className="object-cover"
-                          sizes="100vw"
+                          sizes="100vw" unoptimized
                         />
                       </div>
                       <p className="text-amber-800 text-lg mt-6 font-serif font-bold">

@@ -251,7 +251,7 @@ export default function GalaxyTemplate({ card }: GalaxyTemplateProps) {
                               alt={`Planet ${index + 1}`}
                               fill
                               className="object-cover"
-                              sizes="224px"
+                              sizes="224px" unoptimized
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-purple-900/40 to-transparent rounded-full" />
                           </div>
@@ -425,7 +425,7 @@ export default function GalaxyTemplate({ card }: GalaxyTemplateProps) {
                           alt={`Nebula ${index + 1}`}
                           fill
                           className="object-cover transition-transform duration-700 group-hover:scale-110"
-                          sizes="(max-width: 768px) 100vw, 33vw"
+                          sizes="(max-width: 768px) 100vw, 33vw" unoptimized
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 via-transparent to-blue-900/30 rounded-full" />
                       </div>

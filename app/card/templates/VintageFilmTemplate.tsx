@@ -156,7 +156,7 @@ export default function VintageFilmTemplate({ card }: VintageFilmTemplateProps) 
                       alt="Vintage photo"
                       fill
                       className="object-cover sepia"
-                      sizes="100vw"
+                      sizes="100vw" unoptimized
                     />
                     {/* Enhanced sepia overlay */}
                     <div className="absolute inset-0 bg-amber-900/30 mix-blend-multiply" />
@@ -339,7 +339,7 @@ export default function VintageFilmTemplate({ card }: VintageFilmTemplateProps) 
                           alt={`Frame ${index + 1}`}
                           fill
                           className="object-cover sepia"
-                          sizes="100vw"
+                          sizes="100vw" unoptimized
                         />
                         <div className="absolute inset-0 bg-amber-900/20 mix-blend-multiply" />
                       </div>
